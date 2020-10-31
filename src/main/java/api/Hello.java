@@ -20,6 +20,6 @@ public class Hello
 
     public static void main(String[] args)
     {
-        System.out.println("api.Hello team!");
+        System.out.println("Hello team!");
     }
 }
