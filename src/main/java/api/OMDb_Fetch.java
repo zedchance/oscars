@@ -65,4 +65,40 @@ public class OMDb_Fetch
             return "invalid index";
         }
     }
+
+    // Used to get ID after OMDb_Fetch is called.
+    String getID()
+    {
+        return getInfo("imdbID", 0);
+    }
+
+    // Used to build IMDb Link after OMDb_Fetch is called.
+    String buildLink()
+    {
+        return "https://www.imdb.com/title/" + getID() + "/";
+    }
+
+    // Used to get Year after OMDb_Fetch is called.
+    String getYear()
+    {
+        return getInfo("Year", 0);
+    }
+
+    // Used to get Genre after OMDb_Fetch is called.
+    String getGenre()
+    {
+        return getInfo("Genre", 0);
+    }
+
+    // Used to get Plot after OMDb_Fetch is called.
+    String getPlot()
+    {
+        return getInfo("Plot", 0);
+    }
+
+    // Used to get Poster Link after OMDb_Fetch is called.
+    String getPoster()
+    {
+        return getInfo("Poster", 0);
+    }
 }

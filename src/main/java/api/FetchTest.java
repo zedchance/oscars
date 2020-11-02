@@ -8,11 +8,14 @@ public class FetchTest
     public static void main(String[] args)
     {
         // OMDb API call test to fetch Title, Year, Genre, Plot, IMDb ID
-        OMDb_Fetch f = new OMDb_Fetch("Knives Out");
-        System.out.println("Title: " + f.getInfo("Title", 0));
-        System.out.println("Year: " + f.getInfo("Year", 0));
-        System.out.println("Genre: " + f.getInfo("Genre", 0));
-        System.out.println("Plot: " + f.getInfo("Plot", 0));
-        System.out.println("IMDb ID: " + f.getInfo("imdbID", 0));
+        String s = "Knives Out";
+        OMDb_Fetch f = new OMDb_Fetch(s);
+        System.out.println("Title: " + s);
+        System.out.println("Year: " + f.getYear());
+        System.out.println("Genre: " + f.getGenre());
+        System.out.println("Plot: " + f.getPlot());
+        System.out.println("Poster Link: " + f.getPoster());
+        System.out.println("IMDb ID: " + f.getID());
+        System.out.println("IMDb Link: " + f.buildLink());
     }
 }
