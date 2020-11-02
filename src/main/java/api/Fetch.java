@@ -3,19 +3,27 @@ package api;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Fetch
 {
-    public static void parseData() {
-        String csvFile = "src/main/CSVFile/datahubio_oscar_data_csv.csv";
-        String data = "";
+
+    private String csvFile = "src/main/CSVFile/datahubio_oscar_data_csv.csv";
+    private String data = "";
+    private List<String> newData = new ArrayList<>();
+    private List<String> line;
+
+
+    public String parseData() {
 
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
 
             while ((data = br.readLine()) != null) {
                 // use comma as separator
                 String[] movie = data.split(",");
-                for(String token : movie)
+                for(String token:movie)
                 {
                     System.out.print(token + " | ");
                 }
@@ -25,11 +33,33 @@ public class Fetch
         catch (IOException e) {
             e.printStackTrace();
         }
+        return csvFile;
+    }
 
+
+    public List<String> newLine(int element)
+    {
+        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+
+            while ((data = br.readLine()) != null) {
+                // use comma as separator
+                String[] movie = data.split(",");
+                //System.out.print(token + " | ");
+                newData.add(data);
+            }
+            line = Collections.singletonList(newData.get(element));
+
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        return line;
     }
 
     public static void main(String[] args) throws Exception
     {
-        parseData();
+        Fetch movie = new Fetch();
+
+        System.out.println((movie.newLine(7)));
     }
 }
