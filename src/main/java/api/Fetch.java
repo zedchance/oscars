@@ -10,7 +10,7 @@ import java.util.List;
 public class Fetch
 {
 
-    private String csvFile = "src/main/CSVFile/datahubio_oscar_data_csv.csv";
+    private String csvFile = "src/main/CSVFile/KaggleData_the_oscar_award.csv";
     private String data = "";
     private List<String> newData = new ArrayList<>();
     private List<String> line;
