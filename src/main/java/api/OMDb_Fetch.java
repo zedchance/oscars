@@ -101,4 +101,26 @@ public class OMDb_Fetch
     {
         return getInfo("Poster", 0);
     }
+
+    // Used to get Response after OMDb_Fetch is called.
+    String getResponse()
+    {
+        return getInfo("Response", 0);
+    }
+
+    // Used to get Response after OMDb_Fetch is called.
+    String getError()
+    {
+        return getInfo("Error", 0);
+    }
+
+    /**
+     * Checks if the API query was successful or not
+     * @return success true or false
+     */
+    boolean isSuccessful()
+    {
+        //System.out.println(getInfo("Response", 0));
+        return (getResponse().equals("True"));
+    }
 }
