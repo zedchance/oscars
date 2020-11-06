@@ -26,7 +26,7 @@ public class SelectApp {
 
     public void selectAll(){
 
-        String sql = "SELECT DISTINCT year_film,year_ceremony, film FROM movies WHERE film ";
+        String sql = "SELECT DISTINCT year_film, film FROM movies";
 
         try (Connection conn = this.connect();
              Statement stmt  = conn.createStatement();
