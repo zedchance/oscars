@@ -25,6 +25,6 @@ public class Movie
                 "title='" + title + '\'' +
                 ", year='" + year + '\'' +
                 ", ceremony='" + ceremony + '\'' +
-                '}';
+                '}' + "\n";
     }
 }

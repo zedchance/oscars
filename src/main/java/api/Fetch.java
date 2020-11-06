@@ -8,7 +8,7 @@ import java.util.*;
 public class Fetch
 {
 
-    public static ArrayList<Movie> all() {
+    public static ArrayList<Movie> all(String name) {
         String csvFile = "src/main/CSVFile/KaggleData_the_oscar_award.csv";
         String data = "";
         String title;
@@ -22,7 +22,7 @@ public class Fetch
                 // use comma as separator
                 String[] movie = data.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
 
-                if (!movie[5].equals("")) // checks to see if title is empty, if so does not add to the movie array
+                if (!movie[5].equals("") && movie[5].equalsIgnoreCase(name)) // checks to see if title is empty, if so, does not add to the movie array
                 {
                     title = movie[5];
                     year = movie[0];
@@ -43,6 +43,12 @@ public class Fetch
 
     public static void main(String[] args) throws Exception
     {
-        all();
+        Scanner scan = new Scanner(System.in); //Creates a new scanner
+
+        System.out.println("Movie Name: ");
+
+        String input = scan.nextLine();
+
+        all(input);
     }
 }
