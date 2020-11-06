@@ -16,7 +16,6 @@ public class Movie
         this.title = title;
         this.year = year;
         this.ceremony = ceremony;
-
     }
 
     @Override

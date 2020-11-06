@@ -22,11 +22,14 @@ public class Fetch
                 // use comma as separator
                 String[] movie = data.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
 
-                title = movie[5];
-                year = movie[0];
-                ceremony = movie[2];
+                if (!movie[5].equals("")) // checks to see if title is empty, if so does not add to the movie array
+                {
+                    title = movie[5];
+                    year = movie[0];
+                    ceremony = movie[2];
+                    array.add(new Movie(year, title, ceremony));
+                }
 
-                array.add(new Movie(year, title, ceremony));
             }
             System.out.println(array);
         }
