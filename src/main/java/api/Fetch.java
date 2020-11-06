@@ -8,13 +8,17 @@ import java.util.*;
 public class Fetch
 {
 
-    public static ArrayList<Movie> all(String name) {
+    public static ArrayList<Movie> all(String movieName) {
         String csvFile = "src/main/CSVFile/KaggleData_the_oscar_award.csv";
         String data = "";
         String title;
         String year;
         String ceremony;
-        ArrayList<Movie> array = new ArrayList<Movie>();
+        String category;
+        String name;
+        boolean winner = true;
+        ArrayList<Award> awards = new ArrayList<>();
+        ArrayList<Movie> movieData = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
             br.readLine(); //reads the first line of all the headers because we are not interested in it.
@@ -22,22 +26,33 @@ public class Fetch
                 // use comma as separator
                 String[] movie = data.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
 
-                if (!movie[5].equals("") && movie[5].equalsIgnoreCase(name)) // checks to see if title is empty, if so, does not add to the movie array
+                // checks to see if title is empty, if so, does not add to the movie array
+                if (!movie[5].equals("") && movie[5].equalsIgnoreCase(movieName))
                 {
+
                     title = movie[5];
                     year = movie[0];
                     ceremony = movie[2];
-                    array.add(new Movie(year, title, ceremony));
+
+                    category = movie[3];
+                    name = movie[4];
+
+                    winner = Boolean.parseBoolean(movie[6]);
+                    if(winner)
+                    {
+                        awards.add(new Award(category, name, true));
+                    }
+                    movieData.add(new Movie(year, title, ceremony, awards));
                 }
 
             }
-            System.out.println(array);
+            System.out.println(movieData);
         }
         catch (IOException e)
         {
             e.printStackTrace();
         }
-        return array;
+        return movieData;
     }
 
 
