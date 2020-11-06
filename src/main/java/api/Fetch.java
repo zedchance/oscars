@@ -16,7 +16,7 @@ public class Fetch
         String ceremony;
         String category;
         String name;
-        boolean winner = true;
+        boolean winner;
         ArrayList<Award> awards = new ArrayList<>();
         ArrayList<Movie> movieData = new ArrayList<>();
 
@@ -36,15 +36,11 @@ public class Fetch
 
                     category = movie[3];
                     name = movie[4];
-
                     winner = Boolean.parseBoolean(movie[6]);
-                    if(winner)
-                    {
-                        awards.add(new Award(category, name, true));
-                    }
+
+                    awards.add(new Award(category, name, winner));
                     movieData.add(new Movie(year, title, ceremony, awards));
                 }
-
             }
             System.out.println(movieData);
         }
