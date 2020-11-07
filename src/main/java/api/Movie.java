@@ -27,4 +27,11 @@ public class Movie
                 ", awards=" + awards +
                 '}' + "\n";
     }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        Movie a = (Movie) o;
+        return this.title.equals(a.title) && this.year.equals(a.year);
+    }
 }
