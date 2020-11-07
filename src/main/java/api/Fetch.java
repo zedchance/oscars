@@ -8,7 +8,7 @@ import java.util.*;
 public class Fetch
 {
 
-    public static ArrayList<Movie> all(String movieName) {
+    public static ArrayList<Movie> certainMovie(String movieName) {
         String csvFile = "src/main/CSVFile/KaggleData_the_oscar_award.csv";
         String data = "";
         String title;
@@ -29,17 +29,19 @@ public class Fetch
                 // checks to see if title is empty, if so, does not add to the movie array
                 if (!movie[5].equals("") && movie[5].equalsIgnoreCase(movieName))
                 {
-
+                    // Movie object
                     title = movie[5];
                     year = movie[0];
                     ceremony = movie[2];
-
+                    // Award object
                     category = movie[3];
                     name = movie[4];
                     winner = Boolean.parseBoolean(movie[6]);
 
                     awards.add(new Award(category, name, winner));
+
                     movieData.add(new Movie(year, title, ceremony, awards));
+
                 }
             }
             System.out.println(movieData);
@@ -51,6 +53,51 @@ public class Fetch
         return movieData;
     }
 
+    public static ArrayList<Movie> all() {
+        String csvFile = "src/main/CSVFile/KaggleData_the_oscar_award.csv";
+        String data = "";
+        String title;
+        String year;
+        String ceremony;
+        String category;
+        String name;
+        boolean winner;
+        ArrayList<Award> awards = new ArrayList<>();
+        ArrayList<Movie> movieData = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+            br.readLine(); //reads the first line of all the headers because we are not interested in it.
+            while ((data = br.readLine()) != null) {
+                // use comma as separator
+                String[] movie = data.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+
+                // checks to see if title is empty, if so, does not add to the movie array
+                if (!movie[5].equals(""))
+                {
+                    // Movie object
+                    title = movie[5];
+                    year = movie[0];
+                    ceremony = movie[2];
+                    // Award object
+                    category = movie[3];
+                    name = movie[4];
+                    winner = Boolean.parseBoolean(movie[6]);
+
+                    //awards.add(new Award(category, name, winner));
+
+                    Movie one = (new Movie(year, title, ceremony, awards));
+
+                    movieData.add(one);
+                }
+            }
+            System.out.println(movieData);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return movieData;
+    }
 
     public static void main(String[] args) throws Exception
     {
@@ -60,6 +107,13 @@ public class Fetch
 
         String input = scan.nextLine();
 
-        all(input);
+        if (input.equalsIgnoreCase("all"))
+        {
+            all();
+        } else
+        {
+            certainMovie(input);
+        }
     }
+
 }
