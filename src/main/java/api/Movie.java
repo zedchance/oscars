@@ -9,12 +9,12 @@ public class Movie
     private String ceremony;
     private ArrayList<Award> awards;
 
-    public Movie(String year, String title, String ceremony, ArrayList<Award> awards)
+    public Movie(String year, String title, String ceremony)
     {
         this.title = title;
         this.year = year;
         this.ceremony = ceremony;
-        this.awards = awards;
+        this.awards = new ArrayList<Award>();
     }
 
     @Override
@@ -33,5 +33,10 @@ public class Movie
     {
         Movie a = (Movie) o;
         return this.title.equals(a.title) && this.year.equals(a.year);
+    }
+
+    public void addAward(Award a)
+    {
+        awards.add(a);
     }
 }

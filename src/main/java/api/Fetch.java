@@ -38,10 +38,20 @@ public class Fetch
                     name = movie[4];
                     winner = Boolean.parseBoolean(movie[6]);
 
-                    awards.add(new Award(category, name, winner));
+                    //awards.add(new Award(category, name, winner));
 
-                    movieData.add(new Movie(year, title, ceremony, awards));
+                    Movie one = (new Movie(year, title, ceremony));
 
+                    movieData.add(one);
+
+                    if (movieData.contains(one))
+                    {
+                        one.addAward(new Award(category, name, winner));
+                    }
+                    else
+                    {
+                        movieData.add(one);
+                    }
                 }
             }
             System.out.println(movieData);
@@ -85,9 +95,17 @@ public class Fetch
 
                     //awards.add(new Award(category, name, winner));
 
-                    Movie one = (new Movie(year, title, ceremony, awards));
+                    Movie one = (new Movie(year, title, ceremony));
 
                     movieData.add(one);
+                    if (movieData.contains(one))
+                    {
+                        one.addAward(new Award(category, name, winner));
+                    }
+                    else
+                    {
+                        movieData.add(one);
+                    }
                 }
             }
             System.out.println(movieData);
