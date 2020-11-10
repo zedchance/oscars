@@ -42,16 +42,12 @@ public class FetchFromCSV
 
                     Movie one = (new Movie(year, title, ceremony));
 
-                    movieData.add(one);
-
-                    if (movieData.contains(one))
-                    {
-                        one.addAward(new Award(category, name, winner));
-                    }
-                    else
+                    if (!movieData.contains(one))
                     {
                         movieData.add(one);
                     }
+
+                    movieData.get(movieData.indexOf(one)).addAward(new Award(category, name, winner));
                 }
             }
             System.out.println(movieData);
@@ -101,7 +97,6 @@ public class FetchFromCSV
                     }
 
                     movieData.get(movieData.indexOf(one)).addAward(new Award(category, name, winner));
-
                 }
             }
             System.out.println(movieData);
