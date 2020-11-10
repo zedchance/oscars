@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-public class Fetch
+public class FetchFromCSV
 {
 
     public static ArrayList<Movie> certainMovie(String movieName) {
@@ -93,19 +93,15 @@ public class Fetch
                     name = movie[4];
                     winner = Boolean.parseBoolean(movie[6]);
 
-                    //awards.add(new Award(category, name, winner));
-
                     Movie one = (new Movie(year, title, ceremony));
 
-                    movieData.add(one);
-                    if (movieData.contains(one))
-                    {
-                        one.addAward(new Award(category, name, winner));
-                    }
-                    else
+                    if (!movieData.contains(one))
                     {
                         movieData.add(one);
                     }
+
+                    movieData.get(movieData.indexOf(one)).addAward(new Award(category, name, winner));
+
                 }
             }
             System.out.println(movieData);
