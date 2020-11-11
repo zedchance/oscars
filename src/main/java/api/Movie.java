@@ -13,6 +13,7 @@ public class Movie
     private String poster;
     private String imdbID;
     private String website; // IMDb link built with imbdID
+    private String error;
 
     public Movie(String year, String title, String ceremony)
     {
@@ -25,6 +26,7 @@ public class Movie
         this.poster = "";
         this.imdbID = "";
         this.website = "";
+        this.error = "";
     }
 
     /**
@@ -46,7 +48,8 @@ public class Movie
             }
             else
             {
-                System.out.println("Error: " + f.getError());
+                this.error = f.getError();
+                System.out.println(this.error);
             }
         }
         // else no update required
@@ -103,6 +106,16 @@ public class Movie
     }
 
     /**
+     * Get the Movie's genre
+     *
+     * @return genre as String
+     */
+    public String getGenre()
+    {
+        return genre;
+    }
+
+    /**
      * Get the Movie's plot
      *
      * @return plot as String
@@ -143,13 +156,13 @@ public class Movie
     }
 
     /**
-     * Get the Movie's genre
+     * Get the error field in a Movie object
      *
-     * @return genre as String
+     * @return error as String
      */
-    public String getGenre()
+    public String getError()
     {
-        return genre;
+        return error;
     }
 
     @Override
@@ -159,12 +172,12 @@ public class Movie
                 "title='" + title + '\'' +
                 ", year='" + year + '\'' +
                 ", ceremony='" + ceremony + '\'' +
-                ", awards=" + awards + '\'' +
+                ", awards=" + awards +
                 ", genre='" + genre + '\'' +
                 ", plot='" + plot + '\'' +
                 ", poster='" + poster + '\'' +
                 ", imdbID='" + imdbID + '\'' +
-                ", website='" + website +
+                ", website='" + website + '\'' +
                 '}' + "\n";
     }
 
