@@ -102,6 +102,56 @@ public class Movie
         return awards;
     }
 
+    /**
+     * Get the Movie's plot
+     *
+     * @return plot as String
+     */
+    public String getPlot()
+    {
+        return plot;
+    }
+
+    /**
+     * Get the Movie's poster
+     *
+     * @return poster's jpg as String
+     */
+    public String getPoster()
+    {
+        return poster;
+    }
+
+    /**
+     * Get the Movie's IMDb ID
+     *
+     * @return IMDb ID as String
+     */
+    public String getImdbID()
+    {
+        return imdbID;
+    }
+
+    /**
+     * Get the Movie's link to IMDb website
+     *
+     * @return link to IMDb website as String
+     */
+    public String getWebsite()
+    {
+        return website;
+    }
+
+    /**
+     * Get the Movie's genre
+     *
+     * @return genre as String
+     */
+    public String getGenre()
+    {
+        return genre;
+    }
+
     @Override
     public String toString()
     {
