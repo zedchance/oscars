@@ -15,10 +15,38 @@ Michael Lutsik | Dev
 
 ## Use
 
+Run the `ApiApplication` file and visit `localhost:8080`.
+
 ### Endpoints
 
-URI | Description | Options
---- | --- | ---
-`/hello` | Test endpoint to make sure that the project is working correctly, optionally takes `name` parameter. | `?name=`
-`/all` | Returns all Movies |
-`/movie` | Returns a specific movie by title | `?title=`
+#### `/hello`
+
+This is a test endpoint to make sure that project is working correctly.
+It optionally takes a parameter `name`.
+
+For example:
+
+```
+localhost:8080/hello?name=World
+```
+
+#### `/all`
+
+This is an endpoint that returns all movies available.
+
+For example:
+
+```
+localhost:8080/all
+```
+
+#### `/movie`
+
+This is an endpoint that returns a specific movie by title.
+It uses the syntax `/movie/title`
+
+For example:
+
+```
+localhost:8080/movie/titanic
+```
