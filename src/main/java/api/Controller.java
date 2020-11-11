@@ -35,4 +35,20 @@ public class Controller
     {
         return FetchFromCSV.all();
     }
+
+    /**
+     * An endpoint that returns a specific movie
+     *
+     * @param title the title of the movie, use ?title=
+     * @return a Movie
+     */
+    @GetMapping("/movie")
+    public Movie movie(@RequestParam(value = "title", defaultValue = "null") String title)
+    {
+        if (title.equals("null"))
+        {
+            return new Movie("0", "No title given", "0");
+        }
+        return FetchFromCSV.certainMovie(title).get(0);
+    }
 }
