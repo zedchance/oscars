@@ -10,6 +10,14 @@ public class MovieTest
     @Test
     void updateFields()
     {
+        Movie m = new Movie("2019", "Knives Out", "92");
+        m.updateFields();
+        assertEquals("Movie{title='Knives Out', year='2019', ceremony='92', awards=[]'," +
+                " genre='Comedy, Crime, Drama, Mystery, Thriller', plot='A detective investigat" +
+                "es the death of a patriarch of an eccentric, combative family.', poster='https" +
+                "://m.media-amazon.com/images/M/MV5BMGUwZjliMTAtNzAxZi00MWNiLWE2NzgtZGUxMGQxZjh" +
+                "hNDRiXkEyXkFqcGdeQXVyNjU1NzU3MzE@._V1_SX300.jpg', imdbID='tt8946378', website=" +
+                "'https://www.imdb.com/title/tt8946378/'}\n", m.toString());
     }
 
     @Test
@@ -20,16 +28,22 @@ public class MovieTest
     @Test
     void getTitle()
     {
+        Movie m = new Movie("2019", "Knives Out", "92");
+        assertEquals("Knives Out", m.getTitle());
     }
 
     @Test
     void getYear()
     {
+        Movie m = new Movie("2019", "Knives Out", "92");
+        assertEquals("2019", m.getYear());
     }
 
     @Test
     void getCeremony()
     {
+        Movie m = new Movie("2019", "Knives Out", "92");
+        assertEquals("92", m.getCeremony());
     }
 
     @Test
@@ -38,35 +52,53 @@ public class MovieTest
     }
 
     @Test
+    void getGenre()
+    {
+        Movie m = new Movie("2019", "Knives Out", "92");
+        m.updateFields();
+        assertEquals("Comedy, Crime, Drama, Mystery, Thriller", m.getGenre());
+    }
+
+    @Test
     void getPlot()
     {
+        Movie m = new Movie("2019", "Knives Out", "92");
+        m.updateFields();
+        assertEquals("A detective investigates the death of a patriarch of an eccentric" +
+                ", combative family.", m.getPlot());
     }
 
     @Test
     void getPoster()
     {
+        Movie m = new Movie("2019", "Knives Out", "92");
+        m.updateFields();
+        assertEquals("https://m.media-amazon.com/images/M/MV5BMGUwZjliMTAtNzAxZi00MWNiL" +
+                "WE2NzgtZGUxMGQxZjhhNDRiXkEyXkFqcGdeQXVyNjU1NzU3MzE@._V1_SX300.jpg", m.getPoster());
     }
 
     @Test
     void getImdbID()
     {
+        Movie m = new Movie("2019", "Knives Out", "92");
+        m.updateFields();
+        assertEquals("tt8946378", m.getImdbID());
     }
 
     @Test
     void getWebsite()
     {
-    }
-
-    @Test
-    void getGenre()
-    {
+        Movie m = new Movie("2019", "Knives Out", "92");
+        m.updateFields();
+        assertEquals("https://www.imdb.com/title/tt8946378/", m.getWebsite());
     }
 
     @Test
     void toString1()
     {
         Movie m = new Movie("2019", "Knives Out", "92");
-        assertEquals("Movie{title='Knives Out', year='2019', ceremony='92', awards=[]', genre='', plot='', poster='', imdbID='', website=''}\n", m.toString());
+        assertEquals("Movie{title='Knives Out', year='2019', ceremony='92', awards=[]'," +
+                " genre='', plot='', poster='', imdbID='', website=''}\n", m.toString());
     }
 
     @Test
