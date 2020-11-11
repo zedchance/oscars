@@ -8,9 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MovieTest
 {
-
     @Test
-    void updateFields()
+    void updateFields1()
     {
         Movie m = new Movie("2019", "Knives Out", "92");
         m.updateFields();
@@ -20,6 +19,14 @@ public class MovieTest
                 "//m.media-amazon.com/images/M/MV5BMGUwZjliMTAtNzAxZi00MWNiLWE2NzgtZGUxMGQxZjhh" +
                 "NDRiXkEyXkFqcGdeQXVyNjU1NzU3MzE@._V1_SX300.jpg', imdbID='tt8946378', website='" +
                 "https://www.imdb.com/title/tt8946378/'}\n", m.toString());
+    }
+
+    @Test
+    void updateFields2()
+    {
+        Movie m = new Movie("2019", "adergkmm", "92");
+        m.updateFields();
+        assertEquals("Movie not found!", m.getError());
     }
 
     @Test
@@ -105,6 +112,14 @@ public class MovieTest
         Movie m = new Movie("2019", "Knives Out", "92");
         m.updateFields();
         assertEquals("https://www.imdb.com/title/tt8946378/", m.getWebsite());
+    }
+
+    @Test
+    void getError()
+    {
+        Movie m = new Movie("2019", "adergkmm", "92");
+        m.updateFields();
+        assertEquals("Movie not found!", m.getError());
     }
 
     @Test
