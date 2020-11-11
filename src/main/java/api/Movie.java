@@ -103,6 +103,16 @@ public class Movie
     }
 
     /**
+     * Get the Movie's genre
+     *
+     * @return genre as String
+     */
+    public String getGenre()
+    {
+        return genre;
+    }
+
+    /**
      * Get the Movie's plot
      *
      * @return plot as String
@@ -140,16 +150,6 @@ public class Movie
     public String getWebsite()
     {
         return website;
-    }
-
-    /**
-     * Get the Movie's genre
-     *
-     * @return genre as String
-     */
-    public String getGenre()
-    {
-        return genre;
     }
 
     @Override
