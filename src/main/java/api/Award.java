@@ -13,6 +13,36 @@ public class Award
         this.winner = winner;
     }
 
+    /**
+     * Get the Award's category
+     *
+     * @return category as String
+     */
+    public String getCategory()
+    {
+        return category;
+    }
+
+    /**
+     * Get the Award's name
+     *
+     * @return name as String
+     */
+    public String getName()
+    {
+        return name;
+    }
+
+    /**
+     * Get the Award's win status
+     *
+     * @return winner as boolean
+     */
+    public boolean isWinner()
+    {
+        return winner;
+    }
+
     @Override
     public String toString()
     {
