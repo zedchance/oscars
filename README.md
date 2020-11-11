@@ -13,6 +13,10 @@ Harnoor Singh | Dev
 Visoth Cheam | Dev
 Michael Lutsik | Dev
 
+## Deliverables
+
+Can be viewed [here](DELIVERABLES.md).
+
 ## Use
 
 Run the `ApiApplication` file and visit `localhost:8080`.
