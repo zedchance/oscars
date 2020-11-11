@@ -20,3 +20,5 @@ Michael Lutsik | Dev
 URI | Description | Options
 --- | --- | ---
 `/hello` | Test endpoint to make sure that the project is working correctly, optionally takes `name` parameter. | `?name=`
+`/all` | Returns all Movies |
+`/movie` | Returns a specific movie by title | `?title=`
