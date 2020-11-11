@@ -49,6 +49,8 @@ public class Controller
         {
             return new Movie("0", "No title given", "0");
         }
-        return FetchFromCSV.certainMovie(title).get(0);
+        Movie m = FetchFromCSV.certainMovie(title).get(0);
+        m.updateFields();
+        return m;
     }
 }
