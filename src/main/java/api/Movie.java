@@ -159,7 +159,7 @@ public class Movie
                 "title='" + title + '\'' +
                 ", year='" + year + '\'' +
                 ", ceremony='" + ceremony + '\'' +
-                ", awards=" + awards + '\'' +
+                ", awards=" + awards +
                 ", genre='" + genre + '\'' +
                 ", plot='" + plot + '\'' +
                 ", poster='" + poster + '\'' +
