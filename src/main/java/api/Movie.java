@@ -20,7 +20,11 @@ public class Movie
         this.year = year;
         this.ceremony = ceremony;
         this.awards = new ArrayList<Award>();
+        this.genre = "";
+        this.plot = "";
+        this.poster = "";
         this.imdbID = "";
+        this.website = "";
     }
 
     /**
