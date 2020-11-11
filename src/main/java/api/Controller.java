@@ -1,8 +1,7 @@
 package api;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -10,7 +9,7 @@ import java.util.ArrayList;
  * Oscars API Controller
  */
 @RestController
-public class Controller
+public class Controller implements ErrorController
 {
     /**
      * A test endpoint to make sure that the API is running.
@@ -42,15 +41,40 @@ public class Controller
      * @param title the title of the movie, use ?title=
      * @return a Movie
      */
-    @GetMapping("/movie")
-    public Movie movie(@RequestParam(value = "title", defaultValue = "null") String title)
+    @GetMapping("/movie/{title}")
+    public Movie movie(@PathVariable("title") String title) throws MovieNotFoundException
     {
-        if (title.equals("null"))
-        {
-            return new Movie("0", "No title given", "0");
-        }
         Movie m = FetchFromCSV.certainMovie(title).get(0);
         m.updateFields();
         return m;
+    }
+
+    /**
+     * Basic /error endpoint
+     *
+     * @return Error object with "Endpoint not found" message and 404 code
+     */
+    @GetMapping("/error")
+    public Error error()
+    {
+        return new Error("Endpoint not found", 404);
+    }
+
+    /**
+     * Handles the MovieNotFoundException thrown when /movie can't find the specific title
+     *
+     * @param e MovieNotFoundException
+     * @return Error object with 404 code
+     */
+    @ExceptionHandler(MovieNotFoundException.class)
+    public Error handleMovieNotFound(MovieNotFoundException e)
+    {
+        return new Error(e.getMessage(), 404);
+    }
+
+    @Override
+    public String getErrorPath()
+    {
+        return "/error";
     }
 }
