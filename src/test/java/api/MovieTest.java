@@ -6,6 +6,9 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Test class for Movie.java
+ */
 public class MovieTest
 {
     @Test
