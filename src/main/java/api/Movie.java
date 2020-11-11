@@ -164,7 +164,7 @@ public class Movie
                 ", plot='" + plot + '\'' +
                 ", poster='" + poster + '\'' +
                 ", imdbID='" + imdbID + '\'' +
-                ", website='" + website +
+                ", website='" + website + '\'' +
                 '}' + "\n";
     }
 
