@@ -13,6 +13,7 @@ public class Movie
     private String poster;
     private String imdbID;
     private String website; // IMDb link built with imbdID
+    private String error;
 
     public Movie(String year, String title, String ceremony)
     {
@@ -25,6 +26,7 @@ public class Movie
         this.poster = "";
         this.imdbID = "";
         this.website = "";
+        this.error = "";
     }
 
     /**
@@ -46,7 +48,8 @@ public class Movie
             }
             else
             {
-                System.out.println("Error: " + f.getError());
+                this.error = f.getError();
+                System.out.println(this.error);
             }
         }
         // else no update required
@@ -150,6 +153,16 @@ public class Movie
     public String getWebsite()
     {
         return website;
+    }
+
+    /**
+     * Get the error field in a Movie object
+     *
+     * @return error as String
+     */
+    public String getError()
+    {
+        return error;
     }
 
     @Override
