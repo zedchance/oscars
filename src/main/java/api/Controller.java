@@ -1,5 +1,6 @@
 package api;
 
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
  * Oscars API Controller
  */
 @RestController
-public class Controller
+public class Controller implements ErrorController
 {
     /**
      * A test endpoint to make sure that the API is running.
@@ -48,9 +49,32 @@ public class Controller
         return m;
     }
 
+    /**
+     * Basic /error endpoint
+     *
+     * @return Error object with "Endpoint not found" message and 404 code
+     */
+    @GetMapping("/error")
+    public Error error()
+    {
+        return new Error("Endpoint not found", 404);
+    }
+
+    /**
+     * Handles the MovieNotFoundException thrown when /movie can't find the specific title
+     *
+     * @param e MovieNotFoundException
+     * @return Error object with 404 code
+     */
     @ExceptionHandler(MovieNotFoundException.class)
     public Error handleMovieNotFound(MovieNotFoundException e)
     {
         return new Error(e.getMessage(), 404);
+    }
+
+    @Override
+    public String getErrorPath()
+    {
+        return "/error";
     }
 }
