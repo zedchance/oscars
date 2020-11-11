@@ -1,8 +1,6 @@
 package api;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -42,15 +40,17 @@ public class Controller
      * @param title the title of the movie, use ?title=
      * @return a Movie
      */
-    @GetMapping("/movie")
-    public Movie movie(@RequestParam(value = "title", defaultValue = "null") String title)
+    @GetMapping("/movie/{title}")
+    public Movie movie(@PathVariable("title") String title) throws MovieNotFoundException
     {
-        if (title.equals("null"))
-        {
-            return new Movie("0", "No title given", "0");
-        }
         Movie m = FetchFromCSV.certainMovie(title).get(0);
         m.updateFields();
         return m;
+    }
+
+    @ExceptionHandler(MovieNotFoundException.class)
+    public Error handleMovieNotFound(MovieNotFoundException e)
+    {
+        return new Error(e.getMessage(), 404);
     }
 }

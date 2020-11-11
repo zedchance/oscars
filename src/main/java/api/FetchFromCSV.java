@@ -51,13 +51,20 @@ public class FetchFromCSV
                     movieData.get(movieData.indexOf(one)).addAward(new Award(category, name, winner));
                 }
             }
-            System.out.println(movieData);
         }
         catch (IOException e)
         {
             e.printStackTrace();
         }
-        return movieData;
+        // check to see if a match was found
+        if (movieData.size() == 0)
+        {
+            throw new MovieNotFoundException();
+        }
+        else
+        {
+            return movieData;
+        }
     }
 
     public static ArrayList<Movie> all()
@@ -103,7 +110,6 @@ public class FetchFromCSV
                     movieData.get(movieData.indexOf(one)).addAward(new Award(category, name, winner));
                 }
             }
-            System.out.println(movieData);
         }
         catch (IOException e)
         {
