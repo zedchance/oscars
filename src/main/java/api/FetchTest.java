@@ -1,19 +1,20 @@
 package api;
 
 /**
- * Test class for OMDb_Fetch
+ * Test class for FetchFromOMDb.java
  */
 public class FetchTest
 {
     public static void main(String[] args)
     {
-        // OMDb API call test to fetch Title, Year, Genre, Plot, IMDb ID
-        System.out.println("\nSearch 1");
+        // Test for OMDb API call to fetch various fields for a specific movie
+        System.out.println("\nSearch 1 Test");
         String s = "Knives Out";
-        OMDb_Fetch f = new OMDb_Fetch(s);
+        FetchFromOMDb f = new FetchFromOMDb(s);
         if (f.isSuccessful())
         {
-            System.out.println("Title: " + s);
+            System.out.println("Title Searched: " + s);
+            System.out.println("Title Found: " + f.getTitle());
             System.out.println("Year: " + f.getYear());
             System.out.println("Genre: " + f.getGenre());
             System.out.println("Plot: " + f.getPlot());
@@ -26,12 +27,14 @@ public class FetchTest
             System.out.println("Error: " + f.getError());
         }
 
-        System.out.println("\nSearch 2");
+        // Test for OMDb API call with invalid title
+        System.out.println("\nSearch 2 Test (Should return error)");
         String s2 = "adergkmm";
-        OMDb_Fetch f2 = new OMDb_Fetch(s2);
+        FetchFromOMDb f2 = new FetchFromOMDb(s2);
         if (f2.isSuccessful())
         {
-            System.out.println("Title: " + s2);
+            System.out.println("Title Searched: " + s2);
+            System.out.println("Title Found: " + f2.getTitle());
             System.out.println("Year: " + f2.getYear());
             System.out.println("Genre: " + f2.getGenre());
             System.out.println("Plot: " + f2.getPlot());
