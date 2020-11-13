@@ -11,7 +11,6 @@ public class Movie
     private String genre;
     private String plot;
     private String poster;
-    private String imdbID;
     private String website; // IMDb link built with imbdID
     private String error;
 
@@ -20,13 +19,12 @@ public class Movie
         this.title = title;
         this.year = year;
         this.ceremony = ceremony;
-        this.awards = new ArrayList<Award>();
+        this.awards = new ArrayList<>();
         this.genre = "";
         this.plot = "";
         this.poster = "";
-        this.imdbID = "";
         this.website = "";
-        this.error = "";
+        this.error = "false";
     }
 
     /**
@@ -35,16 +33,15 @@ public class Movie
      */
     public void updateFields()
     {
-        if (this.imdbID.equals(""))
+        if (this.website.equals(""))
         {
-            FetchFromOMDb f = new FetchFromOMDb(title);
+            FetchFromOMDb f = new FetchFromOMDb(title, year);
             if (f.isSuccessful())
             {
                 this.genre = f.getGenre();
                 this.plot = f.getPlot();
                 this.poster = f.getPoster();
-                this.imdbID = f.getID();
-                this.website = f.buildLink();
+                this.website = f.getWebsite();
             }
             else
             {
@@ -136,16 +133,6 @@ public class Movie
     }
 
     /**
-     * Get the Movie's IMDb ID
-     *
-     * @return IMDb ID as String
-     */
-    public String getImdbID()
-    {
-        return imdbID;
-    }
-
-    /**
      * Get the Movie's link to IMDb website
      *
      * @return link to IMDb website as String
@@ -176,7 +163,6 @@ public class Movie
                 ", genre='" + genre + '\'' +
                 ", plot='" + plot + '\'' +
                 ", poster='" + poster + '\'' +
-                ", imdbID='" + imdbID + '\'' +
                 ", website='" + website + '\'' +
                 '}' + "\n";
     }

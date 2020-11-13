@@ -10,22 +10,24 @@ import java.net.URLEncoder;
 public class FetchFromOMDb
 {
     private JsonElement results;
-    private String query;
+    private String queryTitle;
+    private String queryYear;
 
     /**
      * Constructs an FetchFromOMDb object which consists of
      * an array of the information returned from the OMDb API
      */
-    FetchFromOMDb(String title)
+    FetchFromOMDb(String title, String year)
     {
         try
         {
-            //Encode location
-            query = URLEncoder.encode(title, "UTF-8");
+            // Encode title and year
+            queryTitle = URLEncoder.encode(title, "UTF-8");
+            queryYear = URLEncoder.encode(year, "UTF-8");
 
-            //URL concatenation
+            // URL concatenation
             String urlString = "http://www.omdbapi.com/?apikey=" + APIKeys.OMDB_ID
-                    + "&t=" + query + "&plot=full";
+                    + "&t=" + queryTitle + "&y=" + queryYear + "&plot=full";
             URL url = new URL(urlString);
 
             // Open streams
@@ -48,78 +50,65 @@ public class FetchFromOMDb
      * of the requested object (Title, Year, Genre, Plot, etc.) using the specified
      * field name as a means to access the correct information.
      */
-    String getInfo(String accessLabel, int index)
+    String getInfo(String accessLabel)
     {
-        if (index >= 0 && index <= 2)
+        try
         {
-            try
-            {
-                return results.getAsJsonObject().get(accessLabel).getAsString();
-            }
-            catch (java.lang.NullPointerException e)
-            {
-                //Exception disregards if checked object is empty
-            }
-            return "";
+            return results.getAsJsonObject().get(accessLabel).getAsString();
         }
-        else
+        catch (java.lang.NullPointerException e)
         {
-            return "invalid index";
+            //Exception disregards if checked object is empty
         }
+        return "";
     }
 
     // Used to get Title after FetchFromOMDb is called.
     String getTitle()
     {
-        return getInfo("Title", 0);
+        return getInfo("Title");
     }
 
     // Used to get Year after FetchFromOMDb is called.
     String getYear()
     {
-        return getInfo("Year", 0);
+        return getInfo("Year");
     }
 
     // Used to get Genre after FetchFromOMDb is called.
     String getGenre()
     {
-        return getInfo("Genre", 0);
+        return getInfo("Genre");
     }
 
     // Used to get Plot after FetchFromOMDb is called.
     String getPlot()
     {
-        return getInfo("Plot", 0);
+        return getInfo("Plot");
     }
 
     // Used to get Poster Link after FetchFromOMDb is called.
     String getPoster()
     {
-        return getInfo("Poster", 0);
-    }
-
-    // Used to get IMDb ID after FetchFromOMDb is called.
-    String getID()
-    {
-        return getInfo("imdbID", 0);
+        return getInfo("Poster");
     }
 
     // Used to build IMDb Link after FetchFromOMDb is called.
-    String buildLink()
+    String getWebsite()
     {
-        return "https://www.imdb.com/title/" + getID() + "/";
+        return "https://www.imdb.com/title/" + getInfo("imdbID") + "/";
     }
 
     // Used to get Response after FetchFromOMDb is called.
     String getResponse()
     {
-        return getInfo("Response", 0);
+        return getInfo("Response");
     }
 
     // Used to get Error after FetchFromOMDb is called and Response is false.
     String getError()
     {
-        return getInfo("Error", 0);
+        return getInfo("Error");
     }
 
     /**
@@ -129,7 +118,6 @@ public class FetchFromOMDb
      */
     boolean isSuccessful()
     {
-        //System.out.println(getInfo("Response", 0));
         return (getResponse().equals("True"));
     }
 }
