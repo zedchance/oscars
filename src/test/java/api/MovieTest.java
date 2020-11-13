@@ -20,7 +20,7 @@ public class MovieTest
                 "genre='Comedy, Crime, Drama, Mystery, Thriller', plot='A detective investigate" +
                 "s the death of a patriarch of an eccentric, combative family.', poster='https:" +
                 "//m.media-amazon.com/images/M/MV5BMGUwZjliMTAtNzAxZi00MWNiLWE2NzgtZGUxMGQxZjhh" +
-                "NDRiXkEyXkFqcGdeQXVyNjU1NzU3MzE@._V1_SX300.jpg', imdbID='tt8946378', website='" +
+                "NDRiXkEyXkFqcGdeQXVyNjU1NzU3MzE@._V1_SX300.jpg', website='" +
                 "https://www.imdb.com/title/tt8946378/'}\n", m.toString());
     }
 
@@ -40,7 +40,7 @@ public class MovieTest
                 "hnson", false));
         assertEquals("Movie{title='Knives Out', year='2019', ceremony='92', awards=[Awa" +
                 "rd{category='WRITING (Original Screenplay)', name='Written by Rian Johnson', w" +
-                "inner=false}], genre='', plot='', poster='', imdbID='', website=''}\n", m.toString());
+                "inner=false}], genre='', plot='', poster='', website=''}\n", m.toString());
     }
 
     @Test
@@ -102,14 +102,6 @@ public class MovieTest
     }
 
     @Test
-    void getImdbID()
-    {
-        Movie m = new Movie("2019", "Knives Out", "92");
-        m.updateFields();
-        assertEquals("tt8946378", m.getImdbID());
-    }
-
-    @Test
     void getWebsite()
     {
         Movie m = new Movie("2019", "Knives Out", "92");
@@ -130,7 +122,7 @@ public class MovieTest
     {
         Movie m = new Movie("2019", "Knives Out", "92");
         assertEquals("Movie{title='Knives Out', year='2019', ceremony='92', awards=[]," +
-                " genre='', plot='', poster='', imdbID='', website=''}\n", m.toString());
+                " genre='', plot='', poster='', website=''}\n", m.toString());
     }
 
     @Test
