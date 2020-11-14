@@ -63,7 +63,7 @@ public class FetchFromCSV
         }
         else
         {
-            System.out.println(movieData);
+            // System.out.println(movieData); // please keep for testing purposes
             return movieData;
         }
     }
