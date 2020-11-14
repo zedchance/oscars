@@ -63,6 +63,7 @@ public class FetchFromCSV
         }
         else
         {
+            System.out.println(movieData);
             return movieData;
         }
     }
@@ -92,12 +93,12 @@ public class FetchFromCSV
                 if (!movie[5].equals(""))
                 {
                     // Movie object
-                    title = movie[5];
+                    title = Formatter.formatTitle(movie[5]);
                     year = movie[0];
                     ceremony = movie[2];
                     // Award object
                     category = movie[3];
-                    name = movie[4];
+                    name = Formatter.formatName(movie[4]);
                     winner = Boolean.parseBoolean(movie[6]);
 
                     Movie one = (new Movie(year, title, ceremony));
