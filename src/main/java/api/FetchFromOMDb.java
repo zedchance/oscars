@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 
 public class FetchFromOMDb
 {
@@ -25,9 +23,9 @@ public class FetchFromOMDb
     {
         try
         {
-            // Encode title and year
-            queryTitle = URLEncoder.encode(title, StandardCharsets.UTF_8);
-            queryYear = URLEncoder.encode(year, StandardCharsets.UTF_8);
+            // Encode title and year properly for URL
+            queryTitle = Formatter.formatURL(title);
+            queryYear = Formatter.formatURL(year);
 
             // URL concatenation
             String urlString = "http://www.omdbapi.com/?apikey=" + APIKeys.OMDB_ID
