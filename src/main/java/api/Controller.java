@@ -1,6 +1,7 @@
 package api;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -40,6 +41,7 @@ public class Controller implements ErrorController
      *
      * @param title the title of the movie
      * @return a Movie
+     * @throws MovieNotFoundException
      */
     @GetMapping("/movie/{title}")
     public Movie movie(@PathVariable("title") String title) throws MovieNotFoundException
@@ -55,12 +57,14 @@ public class Controller implements ErrorController
      * in the wiki.
      *
      * @param category category to search for
-     * @param winner optional boolean to specify if award was won or not
+     * @param winner   optional boolean to specify if award was won or not
      * @return an ArrayList<Movie> of all movies containing award category
+     * @throws CategoryNotFoundException
      */
     @GetMapping("/category/{category}")
     public ArrayList<Movie> category(@PathVariable("category") String category,
                                      @RequestParam(value = "winner", defaultValue = "none") String winner)
+            throws CategoryNotFoundException
     {
         ArrayList<Movie> all = FetchFromCSV.all();
         ArrayList<Movie> matches = new ArrayList<>();
@@ -75,6 +79,10 @@ public class Controller implements ErrorController
                     else if ("none".equals(winner)) matches.add(movie);
                 }
             }
+        }
+        if (matches.size() == 0)
+        {
+            throw new CategoryNotFoundException();
         }
         return matches;
     }
@@ -91,13 +99,17 @@ public class Controller implements ErrorController
     }
 
     /**
-     * Handles the MovieNotFoundException thrown when /movie can't find the specific title
+     * Generic runtime exception handler. This handles both
+     * MovieNotFoundException and CategoryNotFoundException.
+     * Since both of these exceptions are thrown when item is not found,
+     * status code that is returned is 404.
      *
-     * @param e MovieNotFoundException
-     * @return Error object with 404 code
+     * @param e RuntimeException being caught
+     * @return Error object with exception message and 404 code
      */
-    @ExceptionHandler(MovieNotFoundException.class)
-    public Error handleMovieNotFound(MovieNotFoundException e)
+    @ExceptionHandler(RuntimeException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Error handleException(RuntimeException e)
     {
         return new Error(e.getMessage(), 404);
     }
