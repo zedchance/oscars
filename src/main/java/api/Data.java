@@ -8,7 +8,8 @@ import java.sql.Statement;
 import java.util.Scanner;
 
 //connect the SQL database file with java
-public class data {
+public class Data
+{
     private Connection connect() {
         // SQLite connection string
         String url = "jdbc:sqlite:movies.sqlite";
@@ -44,7 +45,7 @@ public class data {
     }
     //the main method to run the test
     public static void main(String[] args) {
-        data app = new data();
+        Data app = new Data();
         app.selectAll();
     }
 
