@@ -8,7 +8,8 @@
     - The `/all` endpoint returns a collection resource in JSON.
 - [x] Must provide a REST endpoint that delivers a singleton resource in JSON.
     - The `/movie/{title}` endpoint returns a singleton resource in JSON.
-- [ ] Must provide a REST endpoint that allows search of 1 Oscar category and returns results containing the nominees in JSON.
+- [x] Must provide a REST endpoint that allows search of 1 Oscar category and returns results containing the nominees in JSON.
+    - The `/category/{name}` endpoint returns a collection resource of a specific Oscar category in JSON.
 - [x] Must provide a minimum level of documentation regarding access, input, and output to your API endpoints. 
     - API endpoint access documented in [README](README.md#Use).
 
@@ -39,8 +40,10 @@
 - [x] The results returned contain data which correlates the Oscar category results with additional data from an outside source such as OMDb, TMDb, TVDb etc. by providing a link to an external site for the movie.
     - OMDb is used when the singleton endpoint `/movie/{title}` is called. This provides a link to the IMDb page.
 - [ ] The search feature allows limiting results to a date range.
-- [ ] More than one category can be searched.
-- [ ] More than one endpoint that delivers a collection resource.
+- [x] More than one category can be searched.
+    - The `/category/{name}` category can search any of the Oscar categories listed [here](https://github.com/zedchance/oscars/wiki/Endpoints#category).
+- [x] More than one endpoint that delivers a collection resource.
+    - Both `/all` and `/category/{name}` return collection resources.
 - [ ] More than one endpoint that delivers a singleton resource.
 - [ ] GUI for the product (or portions thereof).
 - [ ] Well-designed HTML page documenting API endpoints and example inputs/outputs.
