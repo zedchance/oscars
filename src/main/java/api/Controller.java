@@ -38,7 +38,7 @@ public class Controller implements ErrorController
     /**
      * An endpoint that returns a specific movie
      *
-     * @param title the title of the movie, use ?title=
+     * @param title the title of the movie
      * @return a Movie
      */
     @GetMapping("/movie/{title}")
@@ -47,6 +47,32 @@ public class Controller implements ErrorController
         Movie m = FetchFromCSV.certainMovie(title).get(0);
         m.updateFields();
         return m;
+    }
+
+    /**
+     * An endpoint that returns all movies that won an award
+     * in specified category. View all available categories
+     * in the wiki.
+     *
+     * @param category category to search for
+     * @return an ArrayList<Movie> of all movies containing award category
+     */
+    @GetMapping("/category/{category}")
+    public ArrayList<Movie> category(@PathVariable("category") String category)
+    {
+        ArrayList<Movie> all = FetchFromCSV.all();
+        ArrayList<Movie> matches = new ArrayList<>();
+        for (Movie movie: all)
+        {
+            for (Award award: movie.getAwards())
+            {
+                if (award.getCategory().contains(category))
+                {
+                    matches.add(movie);
+                }
+            }
+        }
+        return matches;
     }
 
     /**
