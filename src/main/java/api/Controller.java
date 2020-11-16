@@ -37,16 +37,36 @@ public class Controller implements ErrorController
     }
 
     /**
-     * An endpoint that returns a specific movie
+     * An endpoint that returns a specific movie. If two movies share the same title,
+     * the oldest is returned. To get a specific movie of a certain year, add the
+     * year paramter, i.e. /movie/titanic?year=1997
      *
      * @param title the title of the movie
      * @return a Movie
      * @throws MovieNotFoundException
      */
     @GetMapping("/movie/{title}")
-    public Movie movie(@PathVariable("title") String title) throws MovieNotFoundException
+    public Movie movie(@PathVariable("title") String title,
+                       @RequestParam(value = "year", defaultValue = "none") String year)
+            throws MovieNotFoundException
     {
-        Movie m = FetchFromCSV.certainMovie(title).get(0);
+        ArrayList<Movie> list = FetchFromCSV.certainMovie(title);
+        Movie m = null;
+        if (!"none".equals(year))
+        {
+            for (Movie movie: list)
+            {
+                if (movie.getYear().equalsIgnoreCase(year)) m = movie;
+            }
+        }
+        else
+        {
+            m = list.get(0);
+        }
+        if (m == null)
+        {
+            throw new MovieNotFoundException();
+        }
         m.updateFields();
         return m;
     }
@@ -54,7 +74,8 @@ public class Controller implements ErrorController
     /**
      * An endpoint that returns all movies that won an award
      * in specified category. View all available categories
-     * in the wiki.
+     * in the wiki. To specify if the movie won in that category, add the
+     * winner parameter, i.e. /category/music?winner=true
      *
      * @param category category to search for
      * @param winner   optional boolean to specify if award was won or not
