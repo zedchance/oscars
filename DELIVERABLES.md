@@ -24,7 +24,7 @@
     - [x] Instructor must receive invite to/location of project.
 - [x] Must implement AT LEAST one user story per sprint.
 - [x] Must incorporate unit testing for a minimum of 2 classes.
-    - Unit tests implemented for both the Movie class, and the Award class.
+    - [Unit tests](https://github.com/zedchance/oscars/tree/master/src/test/java/api) implemented for both the Movie class, and the Award class.
 
 ### Presentation
 
@@ -57,7 +57,7 @@
 - [ ] Incorporate Contextual Inquiry/Elicitation techniques to create visual persona(s) and develop additional personas.
     - As evidenced by notes taken from the inquiries and creation of additional visual persona(s) beyond the minimum (part of deliverable 2).
 - [x] Create mockups for proposed GUI (even if not implemented).
-    - ADD GUI MOCKUP LINK HERE.
+    - Mockups can be viewed [here](https://github.com/zedchance/oscars/wiki/Mockups).
 - [ ] Incorporate pair programing during one Sprint.
     - As evidenced by a 1-minute clip of a recording in-person or Use Together session with link included in final deliverable.
 - [ ] Incorporate one or more design patterns.
