@@ -10,7 +10,7 @@ public class FetchFromCSV
 
     public static ArrayList<Movie> certainMovie(String movieName)
     {
-        String csvFile = "src/main/CSVFile/KaggleData_the_oscar_award.csv";
+        String csvFile = "src/main/resources/KaggleData_the_oscar_award.csv";
         String data = "";
         String title;
         String year;
@@ -70,7 +70,7 @@ public class FetchFromCSV
 
     public static ArrayList<Movie> all()
     {
-        String csvFile = "src/main/CSVFile/KaggleData_the_oscar_award.csv";
+        String csvFile = "src/main/resources/KaggleData_the_oscar_award.csv";
         String data = "";
         String title;
         String year;
@@ -133,7 +133,7 @@ public class FetchFromCSV
         }
         else
         {
-            certainMovie(input);
+            System.out.println(certainMovie(input));
         }
     }
 
