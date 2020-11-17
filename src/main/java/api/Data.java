@@ -23,30 +23,33 @@ public class Data
     }
     //----------------end of the connect method-----------------------
     //select a specific field in the SQL table
-    public void selectAll(){
-        //input to get specific data from the table
-        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-        System.out.println("Enter the movie name: ");
+    public String printValue(String str){
 
-        String mo = "'"+myObj.nextLine()+"%'";
-        String sql = "SELECT json FROM movies WHERE title LIKE "+mo;
+        String mo = "'"+str+"%'";
+        String sql = "SELECT json FROM movies WHERE title Like "+mo;
+        String s1="";
 
         try (Connection conn = this.connect();
              Statement stmt  = conn.createStatement();
              ResultSet rs    = stmt.executeQuery(sql)){
-
             // loop through the result set
             while (rs.next()) {
-                System.out.println(rs.getString("json") +  "\t" );
+                s1=rs.getString("json");
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            s1=e.getMessage();
         }
+        return  s1;
     }
-    //the main method to run the test
+    //------------end of select a specific field in the SQL table------------------
+
     public static void main(String[] args) {
+    //------testing the search values
+        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+        System.out.print("Enter the movie name: ");
+
         Data app = new Data();
-        app.selectAll();
+        System.out.println(app.printValue(myObj.nextLine()));
     }
 
 }
