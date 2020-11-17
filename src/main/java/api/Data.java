@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 //connect the SQL database file with java
@@ -23,23 +24,23 @@ public class Data
     }
     //----------------end of the connect method-----------------------
     //select a specific field in the SQL table
-    public String printValue(String str){
+    public ArrayList<String> printValue(String str){
 
         String mo = "'"+str+"%'";
         String sql = "SELECT json FROM movies WHERE title Like "+mo;
-        String s1="";
+        ArrayList<String> s1= new ArrayList<>();
 
         try (Connection conn = this.connect();
              Statement stmt  = conn.createStatement();
              ResultSet rs    = stmt.executeQuery(sql)){
             // loop through the result set
             while (rs.next()) {
-                s1=rs.getString("json");
+                s1.add(rs.getString("json"));
             }
         } catch (SQLException e) {
-            s1=e.getMessage();
+            System.out.println(e.getMessage());
         }
-        return  s1;
+        return s1;
     }
     //------------end of select a specific field in the SQL table------------------
 
@@ -49,7 +50,12 @@ public class Data
         System.out.print("Enter the movie name: ");
 
         Data app = new Data();
-        System.out.println(app.printValue(myObj.nextLine()));
+        ArrayList<String> arr= app.printValue(myObj.nextLine());
+
+        for (String s : arr)
+        {
+            System.out.println(s);
+        }
     }
 
 }
