@@ -108,6 +108,26 @@ public class Controller implements ErrorController
         return matches;
     }
 
+    @GetMapping("/winner")
+    public ArrayList<Movie> winner(@RequestParam(value = "winner", defaultValue = "true") String winner)
+    {
+        ArrayList<Movie> all = FetchFromCSV.all();
+        ArrayList<Movie> won = new ArrayList<>();
+
+        for (Movie movie: all)
+        {
+            for (Award award : movie.getAwards())
+            {
+                if (winner.equalsIgnoreCase("true") && award.isWinner()) won.add(movie);
+            }
+        }
+        if (won.size() == 0)
+        {
+            throw new CategoryNotFoundException();
+        }
+        return won;
+    }
+
     /**
      * Basic /error endpoint
      *
