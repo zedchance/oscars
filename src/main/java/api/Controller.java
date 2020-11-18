@@ -118,8 +118,13 @@ public class Controller implements ErrorController
         {
             for (Award award : movie.getAwards())
             {
-                if (award.isWinner()) won.add(movie);
-                break;
+
+                if (award.isWinner())
+                {
+                    won.add(movie);
+                    break;
+                }
+
             }
         }
         return won;
