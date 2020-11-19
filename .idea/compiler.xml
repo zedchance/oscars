@@ -9,8 +9,8 @@
         <module name="oscars" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="oscars" target="11" />
+    <bytecodeTargetLevel target="10">
+      <module name="oscars" target="10" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
