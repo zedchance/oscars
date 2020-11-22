@@ -1,0 +1,125 @@
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href='getstarted.css?3'/>
+    <title>Oscar</title>
+
+
+
+</head>
+<body>
+<div class="bg-img">
+    <div class="container">
+        <nav class="topnav">
+            <a href="index.html">Home</a>
+            <a href="getStarted.html">Get Started</a>
+        </nav>
+    </div>
+</div>
+
+
+<div class="wrapper">
+
+    <section class="top-movies">
+
+        <h2>Top Picks</h2>
+
+        <div class="row">
+            <div class="column">
+                <a href="https://www.imdb.com/title/tt4154796/" target="_blank" ><img src="https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SX300.jpg"  style="width:100%"></a>
+            </div>
+            <div class="column">
+                <a href="https://www.imdb.com/title/tt7286456/" target="_blank" ><img src="https://m.media-amazon.com/images/M/MV5BNGVjNWI4ZGUtNzE0MS00YTJmLWE0ZDctN2ZiYTk2YmI3NTYyXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg" style="width:100%"></a>
+            </div>
+            <div class="column">
+                <a href="https://www.imdb.com/title/tt0046435/" target="_blank" ><img src="titanic.jpg" style="width:100%">
+
+            </div>
+            <div class="column">
+                <a href="https://www.imdb.com/title/tt1302006/" target="_blank" ><img src="https://m.media-amazon.com/images/M/MV5BMGUyM2ZiZmUtMWY0OC00NTQ4LThkOGUtNjY2NjkzMDJiMWMwXkEyXkFqcGdeQXVyMzY0MTE3NzU@._V1_SX300.jpg"  style="width:100%"></a>
+            </div>
+            <div class="column">
+                <a href="https://www.imdb.com/title/tt7131622/" target="_blank" ><img src="https://m.media-amazon.com/images/M/MV5BOTg4ZTNkZmUtMzNlZi00YmFjLTk1MmUtNWQwNTM0YjcyNTNkXkEyXkFqcGdeQXVyNjg2NjQwMDQ@._V1_SX300.jpg"  style="width:100%"></a>
+            </div>
+            <div class="column">
+                <a href="https://www.imdb.com/title/tt8946378/" target="_blank" ><img src="https://m.media-amazon.com/images/M/MV5BMGUwZjliMTAtNzAxZi00MWNiLWE2NzgtZGUxMGQxZjhhNDRiXkEyXkFqcGdeQXVyNjU1NzU3MzE@._V1_SX300.jpg"  style="width:100%"></a>
+
+            </div>
+        </div>
+
+
+
+    </section>
+
+
+
+
+
+
+
+    <div class="start-info">
+
+        <!-- <h3>Search your movie <i class="far fa-hand-point-down"></i></h3>
+        -->
+        <div class="search-form" >
+            <input class="search-text" id="input" placeholder="search" type="text">
+
+            <button onclick="getMovie()" type="submit" class="search-btn" id="search"><i class="fas fa-search"></i></button>
+
+
+        </div>
+
+
+
+
+        <div class="movie-detail">
+            <a id="imdb" href="" target="_blank" ><div ><img id="poster" src="" alt=""></div></a>
+
+            <a id="imdb-1" href="" target="_blank" ><h2 id="display"></h2> <h5 id="display-2"></h5></a>
+
+
+            <!--<div><a id="imdb-2" href="" target="_blank" >See on IMDb</a></div>-->
+            <p id="plot"></p>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+</body>
+<script>
+
+    const url ='http://localhost:8080/movie/';
+
+    async function getMovie(){
+        const title = document.getElementById("input").value;
+        const movie = url + title;
+        const pranth = '( ';
+        const pran = ' )';
+
+        const response = await fetch(movie);
+        const data = await response.json();
+
+        document.getElementById('poster').src= data.poster;
+        document.getElementById('display').innerHTML = data.title;
+        document.getElementById('display-2').innerHTML = pranth + data.year + pran;
+        document.getElementById('imdb').href = data.website;
+        document.getElementById('imdb-1').href = data.website;
+        document.getElementById('imdb-2').href = data.website;
+        //document.getElementById('display-3').innerHTML =data.awards[1].category;
+        document.getElementById('plot').innerHTML = data.plot;
+    }
+
+
+
+
+</script>
+</html>
