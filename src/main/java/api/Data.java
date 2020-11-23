@@ -11,6 +11,13 @@ import java.util.Scanner;
 //connect the SQL database file with java
 public class Data
 {
+    private final ArrayList<String> s1= new ArrayList<>();
+    private final String str;
+
+    public Data(String str)
+    {
+       this.str=str;
+    }
     private Connection connect() {
         // SQLite connection string
         String url = "jdbc:sqlite:movies.sqlite";
@@ -24,21 +31,26 @@ public class Data
     }
     //----------------end of the connect method-----------------------
     //select a specific field in the SQL table
-    public ArrayList<String> printValue(String str){
+    public ArrayList<String> printValue(){
+        if (!str.equals(""))
+        {
+            String mo = "'" + str + "%'";
+            String sql = "SELECT json FROM movies WHERE title Like " + mo;
 
-        String mo = "'"+str+"%'";
-        String sql = "SELECT json FROM movies WHERE title Like "+mo;
-        ArrayList<String> s1= new ArrayList<>();
-
-        try (Connection conn = this.connect();
-             Statement stmt  = conn.createStatement();
-             ResultSet rs    = stmt.executeQuery(sql)){
-            // loop through the result set
-            while (rs.next()) {
-                s1.add(rs.getString("json"));
+            try (Connection conn = this.connect();
+                 Statement stmt = conn.createStatement();
+                 ResultSet rs = stmt.executeQuery(sql))
+            {
+                // loop through the result set
+                while (rs.next())
+                {
+                    s1.add(rs.getString("json"));
+                }
             }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            catch (SQLException e)
+            {
+                System.out.println(e.getMessage());
+            }
         }
         return s1;
     }
@@ -49,8 +61,8 @@ public class Data
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
         System.out.print("Enter the movie name: ");
 
-        Data app = new Data();
-        ArrayList<String> arr= app.printValue(myObj.nextLine());
+        Data app = new Data(myObj.nextLine());
+        ArrayList<String> arr= app.printValue();
 
         for (String s : arr)
         {
