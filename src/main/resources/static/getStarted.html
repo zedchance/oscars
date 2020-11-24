@@ -6,7 +6,9 @@
     <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <link rel="stylesheet" href='getstarted.css?3'/>
+    <link rel="stylesheet" href='getstarted.css?4'/>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
     <title>Oscar</title>
 
 
@@ -15,7 +17,7 @@
 <body>
 <div class="bg-img">
     <div class="container">
-        <nav class="topnav">
+        <nav class="topnav" data-aos="fade-right">
             <a href="index.html">Home</a>
             <a href="getStarted.html">Get Started</a>
         </nav>
@@ -25,7 +27,7 @@
 
 <div class="wrapper">
 
-    <section class="top-movies">
+    <section class="top-movies" data-aos="fade-up">
 
         <h2>Top Picks</h2>
 
@@ -37,7 +39,7 @@
                 <a href="https://www.imdb.com/title/tt7286456/" target="_blank" ><img src="https://m.media-amazon.com/images/M/MV5BNGVjNWI4ZGUtNzE0MS00YTJmLWE0ZDctN2ZiYTk2YmI3NTYyXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg" style="width:100%"></a>
             </div>
             <div class="column">
-                <a href="https://www.imdb.com/title/tt0046435/" target="_blank" ><img src="titanic.jpg" style="width:100%">
+                <a href="https://www.imdb.com/title/tt0046435/" target="_blank" ><img src="titanic.jpg" style="width:100%"></a>
 
             </div>
             <div class="column">
@@ -62,29 +64,29 @@
 
 
 
-    <div class="start-info">
+    <div class="start-info" data-aos="fade-down">
 
         <!-- <h3>Search your movie <i class="far fa-hand-point-down"></i></h3>
         -->
-        <div class="search-form" >
+        <form action="" class="search-form" >
             <input class="search-text" id="input" placeholder="search" type="text">
 
             <button onclick="getMovie()" type="submit" class="search-btn" id="search"><i class="fas fa-search"></i></button>
 
 
-        </div>
+        </form>
 
 
 
 
         <div class="movie-detail">
-            <a id="imdb" href="" target="_blank" ><div ><img id="poster" src="" alt=""></div></a>
+            <div ><a id="imdb" href="" target="_blank" ><img data-aos="zoom-in"   id="poster" src="" alt=""></a></div>
 
-            <a id="imdb-1" href="" target="_blank" ><h2 id="display"></h2> <h5 id="display-2"></h5></a>
+            <a  id="imdb-1" href="" target="_blank" ><h2 data-aos="fade-in"  id="display"></h2> <h5 data-aos="fade-in"  id="display-2"></h5></a>
 
 
-            <!--<div><a id="imdb-2" href="" target="_blank" >See on IMDb</a></div>-->
-            <p id="plot"></p>
+
+            <p data-aos="fade-up" id="plot"></p>
         </div>
 
     </div>
@@ -92,11 +94,24 @@
 
 </div>
 
-
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init({
+        offset: 100,
+        delay: 0,
+        duration: 1000
+    });
+</script>
 
 </body>
 <script>
 
+    $("form").on('submit', function (e) {
+        getMovie();
+
+        //stop form submission
+        e.preventDefault();
+    });
     const url ='http://localhost:8080/movie/';
 
     async function getMovie(){
@@ -112,9 +127,6 @@
         document.getElementById('display').innerHTML = data.title;
         document.getElementById('display-2').innerHTML = pranth + data.year + pran;
         document.getElementById('imdb').href = data.website;
-        document.getElementById('imdb-1').href = data.website;
-        document.getElementById('imdb-2').href = data.website;
-        //document.getElementById('display-3').innerHTML =data.awards[1].category;
         document.getElementById('plot').innerHTML = data.plot;
     }
 

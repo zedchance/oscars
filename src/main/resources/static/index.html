@@ -6,7 +6,8 @@
     <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <link rel="stylesheet" href='styles.css?3'/>
+    <link rel="stylesheet" href='styles.css?4'/>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <title>Oscar</title>
 
 
@@ -15,13 +16,13 @@
 <body>
 <div class="bg-img">
     <div class="container">
-        <nav class="topnav">
+        <nav class="topnav" data-aos="fade-right">
             <a href="index.html">Home</a>
             <a href="getStarted.html">Get Started</a>
         </nav>
     </div>
 </div>
-<div class="wrap">
+<div class="wrap" data-aos="fade-in">
     <div class="about-section">
         <h1> The Academy of Motion Picture Arts and Sciences (AMPAS) </h1>
         <p> AMPAS has decided to open the process of voting for academy awards to the world.
@@ -31,7 +32,7 @@
         <p>Get started by following the steps bellow:</p>
     </div>
     <hr>
-    <div class="search">
+    <div class="search" data-aos="fade-in">
         <div class="search-info">
             <h2>Instructions</h2>
             <ol>
@@ -44,6 +45,15 @@
     </div>
 
 </div>
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init({
+        offset: 100,
+        delay: 0,
+        duration: 1000
+    });
+</script>
 </body>
 
 </html>

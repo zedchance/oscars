@@ -15,11 +15,11 @@
     min-height: 480px;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: cover;
     position: relative;
 }
 body{
-    height: 80vh;
+    height: auto;
 }
 .container {
     position: absolute;
@@ -54,7 +54,7 @@ body{
 
 
     background: url("back2.jpg") no-repeat center center/cover;
-    height: 120vh;
+    height: 120%;
 }
 
 .top-movies{
@@ -164,7 +164,17 @@ body{
 }
 
 .movie-detail p{
-    padding-top: 10px;
+    padding: 10px 100px;
     font-size: 20px;
     letter-spacing: 2px;
+
+}
+
+
+
+@media screen and (max-width:1024px) {
+    .bg-img {
+
+        min-height: 380px;
+    }
 }

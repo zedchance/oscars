@@ -8,11 +8,11 @@
   min-height: 480px;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: cover;
   position: relative;
 }
 body{
-  height: 63vh;
+  height: auto;
 }
 .container {
   position: absolute;
@@ -23,7 +23,7 @@ body{
   z-index: 9;
   background: url("back3.jfif") no-repeat center ;
   background-size: cover;
-  height: 100%;
+  height: 75%;
 }
 
 .topnav {
@@ -76,4 +76,13 @@ body{
 .search-info ol li{
   margin-top: 20px;
 
+}
+
+
+
+@media screen and (max-width:1024px) {
+  .bg-img {
+
+    min-height: 380px;
+  }
 }
