@@ -4,6 +4,7 @@ import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.plaf.synth.SynthDesktopIconUI;
 import java.util.ArrayList;
 
 /**
@@ -129,6 +130,29 @@ public class Controller implements ErrorController
         }
         return won;
     }
+
+    @GetMapping("/award/{year1}-{year2}")
+    public ArrayList<Movie> year(@PathVariable("year1") Integer year1, @PathVariable("year2") Integer year2)
+    {
+        ArrayList<Movie> all = FetchFromCSV.all();
+        ArrayList<Movie> yearOfAward = new ArrayList<>();
+
+
+        for (int i = year1; i <= year2; i++)
+        {
+            year1 = i;
+            for (Movie movie: all)
+            {
+                if (movie.getYear().contains(year1.toString()))
+                {
+                    yearOfAward.add(movie);
+                }
+            }
+        }
+        return yearOfAward;
+
+    }
+
 
     /**
      * Basic /error endpoint
