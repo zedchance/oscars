@@ -122,12 +122,18 @@
 
         const response = await fetch(movie);
         const data = await response.json();
+        if(data.hasOwnProperty("title")){
+            document.getElementById('display').innerHTML = data.title;
+            document.getElementById('poster').src= data.poster;
+            document.getElementById('display-2').innerHTML = pranth + data.year + pran;
+            document.getElementById('imdb').href = data.website;
+            document.getElementById('plot').innerHTML = data.plot;
+        }else{
+            document.getElementById('display').innerHTML = data.error;
+        }
 
-        document.getElementById('poster').src= data.poster;
-        document.getElementById('display').innerHTML = data.title;
-        document.getElementById('display-2').innerHTML = pranth + data.year + pran;
-        document.getElementById('imdb').href = data.website;
-        document.getElementById('plot').innerHTML = data.plot;
+
+
     }
 
 

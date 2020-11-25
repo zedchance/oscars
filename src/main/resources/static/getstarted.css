@@ -12,15 +12,13 @@
 .bg-img {
     /* The image used */
     background-image: url("oscars.jpg");
-    min-height: 480px;
+    min-height: 430px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
 }
-body{
-    height: auto;
-}
+
 .container {
     position: absolute;
 //margin: 20px;
@@ -54,12 +52,12 @@ body{
 
 
     background: url("back2.jpg") no-repeat center center/cover;
-    height: 120%;
+    height: 160vh;
 }
 
 .top-movies{
-    padding: 100px 0;
-    margin-bottom: 100px;
+    padding-top: 20px;
+    margin-bottom: 50px;
 }
 
 .top-movies h2{
@@ -101,7 +99,7 @@ body{
 .search-form{
     position: relative;
     left: 50%;
-    width: 350px;
+    width: 550px;
     height: 40px;
     border-radius: 40px;
     border: 1px solid white;
@@ -117,7 +115,7 @@ body{
     left: 38px;
     font-size: 18px;
     background: none;
-    width: 195px;
+    width: 90%;
     color: white;
     height: 20px;
     border: none;
@@ -142,6 +140,11 @@ body{
     outline: none!important;
     cursor: pointer;
 }
+
+.movie-detail{
+    padding-bottom:100px;
+}
+
 
 .movie-detail a{
     text-decoration: none;
