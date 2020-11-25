@@ -33,23 +33,23 @@
 
         <div class="row">
             <div class="column">
-                <a href="https://www.imdb.com/title/tt4154796/" target="_blank" ><img src="https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SX300.jpg"  style="width:100%"></a>
+                <a href="https://www.imdb.com/title/tt4154796/" target="_blank" ><img src="https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SX300.jpg"  alt='' style="width:100%"></a>
             </div>
             <div class="column">
-                <a href="https://www.imdb.com/title/tt7286456/" target="_blank" ><img src="https://m.media-amazon.com/images/M/MV5BNGVjNWI4ZGUtNzE0MS00YTJmLWE0ZDctN2ZiYTk2YmI3NTYyXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg" style="width:100%"></a>
+                <a href="https://www.imdb.com/title/tt7286456/" target="_blank" ><img src="https://m.media-amazon.com/images/M/MV5BNGVjNWI4ZGUtNzE0MS00YTJmLWE0ZDctN2ZiYTk2YmI3NTYyXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg" alt='' style="width:100%"></a>
             </div>
             <div class="column">
                 <a href="https://www.imdb.com/title/tt0046435/" target="_blank" ><img src="titanic.jpg" style="width:100%"></a>
 
             </div>
             <div class="column">
-                <a href="https://www.imdb.com/title/tt1302006/" target="_blank" ><img src="https://m.media-amazon.com/images/M/MV5BMGUyM2ZiZmUtMWY0OC00NTQ4LThkOGUtNjY2NjkzMDJiMWMwXkEyXkFqcGdeQXVyMzY0MTE3NzU@._V1_SX300.jpg"  style="width:100%"></a>
+                <a href="https://www.imdb.com/title/tt1302006/" target="_blank" ><img src="https://m.media-amazon.com/images/M/MV5BMGUyM2ZiZmUtMWY0OC00NTQ4LThkOGUtNjY2NjkzMDJiMWMwXkEyXkFqcGdeQXVyMzY0MTE3NzU@._V1_SX300.jpg"  alt='' style="width:100%"></a>
             </div>
             <div class="column">
-                <a href="https://www.imdb.com/title/tt7131622/" target="_blank" ><img src="https://m.media-amazon.com/images/M/MV5BOTg4ZTNkZmUtMzNlZi00YmFjLTk1MmUtNWQwNTM0YjcyNTNkXkEyXkFqcGdeQXVyNjg2NjQwMDQ@._V1_SX300.jpg"  style="width:100%"></a>
+                <a href="https://www.imdb.com/title/tt7131622/" target="_blank" ><img src="https://m.media-amazon.com/images/M/MV5BOTg4ZTNkZmUtMzNlZi00YmFjLTk1MmUtNWQwNTM0YjcyNTNkXkEyXkFqcGdeQXVyNjg2NjQwMDQ@._V1_SX300.jpg"  alt='' style="width:100%"></a>
             </div>
             <div class="column">
-                <a href="https://www.imdb.com/title/tt8946378/" target="_blank" ><img src="https://m.media-amazon.com/images/M/MV5BMGUwZjliMTAtNzAxZi00MWNiLWE2NzgtZGUxMGQxZjhhNDRiXkEyXkFqcGdeQXVyNjU1NzU3MzE@._V1_SX300.jpg"  style="width:100%"></a>
+                <a href="https://www.imdb.com/title/tt8946378/" target="_blank" ><img src="https://m.media-amazon.com/images/M/MV5BMGUwZjliMTAtNzAxZi00MWNiLWE2NzgtZGUxMGQxZjhhNDRiXkEyXkFqcGdeQXVyNjU1NzU3MzE@._V1_SX300.jpg"  alt='' style="width:100%"></a>
 
             </div>
         </div>
@@ -122,6 +122,7 @@
 
         const response = await fetch(movie);
         const data = await response.json();
+
         if(data.hasOwnProperty("title")){
             document.getElementById('display').innerHTML = data.title;
             document.getElementById('poster').src= data.poster;
@@ -130,6 +131,10 @@
             document.getElementById('plot').innerHTML = data.plot;
         }else{
             document.getElementById('display').innerHTML = data.error;
+            document.getElementById('poster').src= '';
+            document.getElementById('display-2').innerHTML ='';
+            document.getElementById('imdb').href = '';
+            document.getElementById('plot').innerHTML = '';
         }
 
 
