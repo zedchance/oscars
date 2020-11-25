@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Oscars API Controller
@@ -12,6 +13,12 @@ import java.util.ArrayList;
 @RestController
 public class Controller implements ErrorController
 {
+    /**
+     * Global list of all movies contained in CSV file,
+     * read into memory once so it can be reused.
+     */
+    private static final List<Movie> ALL_MOVIES = FetchFromCSV.all();
+
     /**
      * A test endpoint to make sure that the API is running.
      * This endpoint is at /hello
@@ -31,37 +38,44 @@ public class Controller implements ErrorController
      * @return an ArrayList<Movie> of all the movies
      */
     @GetMapping("/all")
-    public ArrayList<Movie> all()
+    public List<Movie> all()
     {
-        return FetchFromCSV.all();
+        return ALL_MOVIES;
     }
 
     /**
      * An endpoint that returns a specific movie. If two movies share the same title,
      * the oldest is returned. To get a specific movie of a certain year, add the
-     * year paramter, i.e. /movie/titanic?year=1997
+     * year parameter, i.e. /movie/titanic?year=1997
      *
      * @param title the title of the movie
      * @return a Movie
-     * @throws MovieNotFoundException
+     * @throws MovieNotFoundException when movie isn't found
      */
     @GetMapping("/movie/{title}")
     public Movie movie(@PathVariable("title") String title,
                        @RequestParam(value = "year", defaultValue = "none") String year)
             throws MovieNotFoundException
     {
-        ArrayList<Movie> list = FetchFromCSV.certainMovie(title);
+        ArrayList<Movie> matches = new ArrayList<>();
         Movie m = null;
+        for (Movie movie: ALL_MOVIES)
+        {
+            if (movie.getTitle().equalsIgnoreCase(title))
+            {
+                matches.add(movie);
+            }
+        }
         if (!"none".equals(year))
         {
-            for (Movie movie: list)
+            for (Movie movie: matches)
             {
                 if (movie.getYear().equalsIgnoreCase(year)) m = movie;
             }
         }
         else
         {
-            m = list.get(0);
+            m = matches.get(0);
         }
         if (m == null)
         {
@@ -80,16 +94,15 @@ public class Controller implements ErrorController
      * @param category category to search for
      * @param winner   optional boolean to specify if award was won or not
      * @return an ArrayList<Movie> of all movies containing award category
-     * @throws CategoryNotFoundException
+     * @throws CategoryNotFoundException when category isn't found
      */
     @GetMapping("/category/{category}")
-    public ArrayList<Movie> category(@PathVariable("category") String category,
+    public List<Movie> category(@PathVariable("category") String category,
                                      @RequestParam(value = "winner", defaultValue = "none") String winner)
             throws CategoryNotFoundException
     {
-        ArrayList<Movie> all = FetchFromCSV.all();
         ArrayList<Movie> matches = new ArrayList<>();
-        for (Movie movie : all)
+        for (Movie movie : ALL_MOVIES)
         {
             for (Award award : movie.getAwards())
             {
