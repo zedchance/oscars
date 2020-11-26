@@ -15,25 +15,16 @@ public class TMDb_Fetch
 
     public class MovieResults
     {
-        public int page;
-        public int total_results;
-        public int total_pages;
         public Results[] results;
 
             public class Results
             {
-                public double popularity;
                 public int id;
-                public boolean video;
-                public int vote_count;
-                public double vote_average;
                 public String title;
                 public String release_date;
                 public String original_language;
                 public String original_title;
-                public int[] genre_ids;
                 public String backdrop_path;
-                public boolean adult;
                 public String overview;
                 public String poster_path;
 

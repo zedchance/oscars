@@ -32,6 +32,5 @@ public class TMDbFetchTest
         System.out.println("Title = " + movie.title);
         System.out.println("Overview = " + movie.overview);
         System.out.println("Release Date = " + movie.release_date);
-        System.out.println("Vote Count = " + movie.vote_count);
     }
 }
