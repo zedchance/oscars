@@ -35,7 +35,7 @@ public class Controller implements ErrorController
     /**
      * An endpoint that returns all 4934 movies
      *
-     * @return an ArrayList<Movie> of all the movies
+     * @return a List<Movie> of all the movies
      */
     @GetMapping("/all")
     public List<Movie> all()
@@ -59,7 +59,7 @@ public class Controller implements ErrorController
     {
         ArrayList<Movie> matches = new ArrayList<>();
         Movie m = null;
-        for (Movie movie: ALL_MOVIES)
+        for (Movie movie : ALL_MOVIES)
         {
             if (movie.getTitle().equalsIgnoreCase(title))
             {
@@ -68,7 +68,7 @@ public class Controller implements ErrorController
         }
         if (!"none".equals(year))
         {
-            for (Movie movie: matches)
+            for (Movie movie : matches)
             {
                 if (movie.getYear().equalsIgnoreCase(year)) m = movie;
             }
@@ -93,12 +93,12 @@ public class Controller implements ErrorController
      *
      * @param category category to search for
      * @param winner   optional boolean to specify if award was won or not
-     * @return an ArrayList<Movie> of all movies containing award category
+     * @return a List<Movie> of all movies containing award category
      * @throws CategoryNotFoundException when category isn't found
      */
     @GetMapping("/category/{category}")
     public List<Movie> category(@PathVariable("category") String category,
-                                     @RequestParam(value = "winner", defaultValue = "none") String winner)
+                                @RequestParam(value = "winner", defaultValue = "none") String winner)
             throws CategoryNotFoundException
     {
         ArrayList<Movie> matches = new ArrayList<>();
