@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Test class for Movie.java
  */
-public class MovieTest
+class MovieTest
 {
     @Test
     void updateFields1()

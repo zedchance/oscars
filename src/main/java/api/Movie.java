@@ -179,7 +179,7 @@ public class Movie
         {
             return false;
         }
-        Movie a = (Movie)o;
+        Movie a = (Movie) o;
         return this.title.equals(a.title) && this.year.equals(a.year);
     }
 }
