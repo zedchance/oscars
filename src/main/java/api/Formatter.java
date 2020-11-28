@@ -3,8 +3,13 @@ package api;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
-class Formatter
+public class Formatter
 {
+    private Formatter()
+    {
+        throw new IllegalStateException("Utility class");
+    }
+
     static String formatTitle(String s)
     {
         s = s.replace(";", "");
