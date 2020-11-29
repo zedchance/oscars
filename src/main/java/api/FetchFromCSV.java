@@ -1,15 +1,13 @@
 package api;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 public class FetchFromCSV
 {
     public static ArrayList<Movie> all()
     {
-        String csvFile = "src/main/resources/KaggleData_the_oscar_award.csv";
+        String csvFile = "/KaggleData_the_oscar_award.csv";
         String data = "";
         String title;
         String year;
@@ -17,10 +15,10 @@ public class FetchFromCSV
         String category;
         String name;
         boolean winner;
-        ArrayList<Award> awards = new ArrayList<>();
         ArrayList<Movie> movieData = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(csvFile)))
+        InputStream in = FetchFromCSV.class.getResourceAsStream(csvFile);
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(in)))
         {
             br.readLine(); //reads the first line of all the headers because we are not interested in it.
             while ((data = br.readLine()) != null)
