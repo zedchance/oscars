@@ -2,5 +2,10 @@ package api;
 
 class APIKeys
 {
-    final static String OMDB_ID = "e927bb71";
+    private APIKeys()
+    {
+        throw new IllegalStateException("Utility class");
+    }
+
+    static final String OMDB_ID = "e927bb71";
 }
