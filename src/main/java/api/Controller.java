@@ -55,7 +55,6 @@ public class Controller implements ErrorController
     @GetMapping("/movie/{title}")
     public Movie movie(@PathVariable("title") String title,
                        @RequestParam(value = "year", defaultValue = "none") String year)
-            throws MovieNotFoundException
     {
         ArrayList<Movie> matches = new ArrayList<>();
         Movie m = null;
@@ -73,7 +72,7 @@ public class Controller implements ErrorController
                 if (movie.getYear().equalsIgnoreCase(year)) m = movie;
             }
         }
-        else
+        else if (!matches.isEmpty())
         {
             m = matches.get(0);
         }
@@ -99,7 +98,6 @@ public class Controller implements ErrorController
     @GetMapping("/category/{category}")
     public List<Movie> category(@PathVariable("category") String category,
                                 @RequestParam(value = "winner", defaultValue = "none") String winner)
-            throws CategoryNotFoundException
     {
         ArrayList<Movie> matches = new ArrayList<>();
         for (Movie movie : ALL_MOVIES)
