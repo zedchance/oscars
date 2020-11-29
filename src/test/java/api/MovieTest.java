@@ -2,14 +2,14 @@ package api;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Test class for Movie.java
  */
-public class MovieTest
+class MovieTest
 {
     @Test
     void updateFields1()
@@ -70,7 +70,7 @@ public class MovieTest
         Movie m = new Movie("2019", "Knives Out", "92");
         m.addAward(new Award("WRITING (Original Screenplay)", "Written by Rian Joh" +
                 "nson", Boolean.parseBoolean("FALSE")));
-        ArrayList<Award> a = m.getAwards();
+        List<Award> a = m.getAwards();
         assertEquals("[Award{category='WRITING (Original Screenplay)', name='Written by " +
                 "Rian Johnson', winner=false}]", a.toString());
     }
