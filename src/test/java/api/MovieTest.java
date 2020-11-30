@@ -33,6 +33,17 @@ class MovieTest
     }
 
     @Test
+    void updateFields3()
+    {
+        Movie m = new Movie("1929", "Street of Chance", "3");
+        m.updateFields();
+        assertEquals("Movie{title='Street of Chance', year='1930', ceremony='3', awards" +
+                "=[], genre='Drama', plot='N/A', poster='https://m.media-amazon.com/images/M/MV" +
+                "5BMzVhMDc2MDMtNTkxNC00YjYxLTlmODYtY2JkZWY4NWIwMjk2XkEyXkFqcGdeQXVyMjUxODE0MDY@" +
+                "._V1_SX300.jpg', website='https://www.imdb.com/title/tt0021420/'}\n", m.toString());
+    }
+
+    @Test
     void addAward()
     {
         Movie m = new Movie("2019", "Knives Out", "92");
@@ -138,6 +149,22 @@ class MovieTest
     {
         Movie a = new Movie("2019", "Knives Out", "92");
         Movie b = new Movie("1776", "Knives Out", "92");
+        assertEquals(false, a.equals(b));
+    }
+
+    @Test
+    void equals3()
+    {
+        Movie a = new Movie("1776", "Knives Out", "92");
+        Movie b = null;
+        assertEquals(false, a.equals(b));
+    }
+
+    @Test
+    void equals4()
+    {
+        Movie a = new Movie("2019", "Knives Out", "92");
+        Award b = new Award("WRITING (Original Screenplay)", "Written by Rian Johnson", false);
         assertEquals(false, a.equals(b));
     }
 }
