@@ -58,9 +58,11 @@ public class Controller implements ErrorController
     {
         ArrayList<Movie> matches = new ArrayList<>();
         Movie m = null;
+        String s1= "(?i)("+title+").*"; // regex for searching the word start first in the titles
+        String s2= ".*(?i)"+title+".*"; // regex for searching the word start anywhere in the title
         for (Movie movie : ALL_MOVIES)
         {
-            if (movie.getTitle().equalsIgnoreCase(title))
+            if (movie.getTitle().matches(s1) || movie.getTitle().matches(s2))
             {
                 matches.add(movie);
             }
@@ -80,6 +82,7 @@ public class Controller implements ErrorController
         {
             throw new MovieNotFoundException();
         }
+        System.out.println(matches); // testing printing
         m.updateFields();
         return m;
     }
