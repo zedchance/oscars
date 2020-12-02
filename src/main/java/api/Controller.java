@@ -32,10 +32,49 @@ public class Controller implements ErrorController
      *
      * @return an ArrayList<Movie> of all the movies
      */
-    @GetMapping("/all")
-    public ArrayList<Movie> all()
+    @GetMapping(value  = { "/all", "/all/{year1}", "/all/{year1}/{year2}"})
+    public ArrayList<Movie> all(@PathVariable(required = false) Integer year1,
+                                @PathVariable(required = false) Integer year2)
     {
-        return FetchFromCSV.all();
+        ArrayList<Movie> all = FetchFromCSV.all();
+        ArrayList<Movie> yearOfAward = new ArrayList<>();
+
+
+        if (year1 == null && year2 == null)
+        {
+            yearOfAward.addAll(all);
+        }
+
+        if (year1 != null && year2 == null)
+        {
+            for (Movie movie : all)
+            {
+                if (movie.getYear().contains(year1.toString()))
+                {
+                    yearOfAward.add(movie);
+
+                }
+            }
+        }
+
+        if (year1 != null && year2 != null)
+        {
+            for (int i = year1; i <= year2; i++)
+            {
+                year1 = i;
+                for (Movie movie : all)
+                {
+                    if (movie.getYear().contains(year1.toString()))
+                    {
+                        yearOfAward.add(movie);
+                    }
+                }
+            }
+        }
+
+        return yearOfAward;
+
+
     }
 
     /**
@@ -130,44 +169,6 @@ public class Controller implements ErrorController
             }
         }
         return won;
-    }
-
-    @GetMapping(value = { "/award.year/{year1}", "/award.year/{year1}/{year2}" })
-    public ArrayList<Movie> year(@PathVariable() Integer year1,
-                                 @PathVariable(required = false) Integer year2)
-    {
-        ArrayList<Movie> all = FetchFromCSV.all();
-        ArrayList<Movie> yearOfAward = new ArrayList<>();
-
-        if (year1 != null && year2 == null)
-        {
-            for (Movie movie : all)
-            {
-                if (movie.getYear().contains(year1.toString()))
-                {
-                    yearOfAward.add(movie);
-
-                }
-            }
-        }
-
-        if (year1 != null && year2 != null)
-        {
-            for (int i = year1; i <= year2; i++)
-            {
-                year1 = i;
-                for (Movie movie : all)
-                {
-                    if (movie.getYear().contains(year1.toString()))
-                    {
-                        yearOfAward.add(movie);
-                    }
-                }
-            }
-        }
-
-        return yearOfAward;
-
     }
 
 
