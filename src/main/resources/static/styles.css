@@ -1,0 +1,88 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+.bg-img {
+  /* The image used */
+  background-image: url("oscars.jpg");
+  min-height: 480px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+body{
+  height: auto;
+}
+.container {
+  position: absolute;
+//margin: 20px;
+  width: auto;
+}
+.wrap{
+  z-index: 9;
+  background: url("back3.jfif") no-repeat center ;
+  background-size: cover;
+  height: 75%;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 19px;
+}
+
+.topnav a:hover {
+  color: chocolate;
+}
+.about-section {
+  padding: 50px 150px;
+  text-align: center;
+  color: black;
+}
+
+.about-section h1{
+  margin-bottom: 30px;
+}
+.about-section p{
+  line-height: 25px;
+  letter-spacing: 2px;
+  font-size: 18px;
+}
+
+.search{
+  text-align: center;
+  margin-top: 100px;
+  padding:0px 50px;
+}
+
+.search-info{
+
+  text-align: left;
+  line-height: 20px;
+  letter-spacing: 1px;
+}
+.search-info h2{
+  margin-bottom: 30px;
+}
+.search-info ol li{
+  margin-top: 20px;
+
+}
+
+
+
+@media screen and (max-width:1024px) {
+  .bg-img {
+
+    min-height: 380px;
+  }
+}

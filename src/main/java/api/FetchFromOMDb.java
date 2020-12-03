@@ -8,12 +8,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.logging.Logger;
 
 public class FetchFromOMDb
 {
     private JsonElement results;
     private String queryTitle;
     private String queryYear;
+    private Logger log = Logger.getLogger("api.log");
 
     /**
      * Constructs an FetchFromOMDb object which consists of
@@ -43,7 +45,7 @@ public class FetchFromOMDb
         }
         catch (IOException e)
         {
-            e.printStackTrace();
+            log.info(e.getMessage());
         }
     }
 

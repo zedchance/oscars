@@ -1,6 +1,7 @@
 package api;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Movie
 {
@@ -33,6 +34,7 @@ public class Movie
      */
     public void updateFields()
     {
+        // Checks to see if the OMDb fields have already been filled.
         if (this.website.equals(""))
         {
             FetchFromOMDb f = new FetchFromOMDb(title, year);
@@ -45,8 +47,21 @@ public class Movie
             }
             else
             {
-                this.error = f.getError();
-                System.out.println(this.error);
+                // check the next year in case the csv file had it listed incorrectly
+                String nextYear = String.valueOf(Integer.parseInt(year) + 1);
+                f = new FetchFromOMDb(title, nextYear);
+                if (f.isSuccessful())
+                {
+                    this.genre = f.getGenre();
+                    this.plot = f.getPlot();
+                    this.poster = f.getPoster();
+                    this.website = f.getWebsite();
+                    this.year = nextYear; // update year to match entry found on OMDb
+                }
+                else
+                {
+                    this.error = f.getError();
+                }
             }
         }
         // else no update required
@@ -97,7 +112,7 @@ public class Movie
      *
      * @return awards as ArrayList<Award>
      */
-    public ArrayList<Award> getAwards()
+    public List<Award> getAwards()
     {
         return awards;
     }
@@ -170,6 +185,14 @@ public class Movie
     @Override
     public boolean equals(Object o)
     {
+        if (o == null)
+        {
+            return false;
+        }
+        if (this.getClass() != o.getClass())
+        {
+            return false;
+        }
         Movie a = (Movie) o;
         return this.title.equals(a.title) && this.year.equals(a.year);
     }
