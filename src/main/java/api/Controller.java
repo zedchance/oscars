@@ -19,6 +19,7 @@ public class Controller implements ErrorController
      * read into memory once so it can be reused.
      */
     private static final List<Movie> ALL_MOVIES = FetchFromCSV.all();
+    private Random r = new Random();
 
     /**
      * A test endpoint to make sure that the API is running.
@@ -93,7 +94,6 @@ public class Controller implements ErrorController
     @GetMapping("/random")
     public Movie random()
     {
-        Random r = new Random();
         Movie m = ALL_MOVIES.get(r.nextInt(ALL_MOVIES.size()));
         m.updateFields();
         return m;
