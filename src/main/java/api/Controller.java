@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Oscars API Controller
@@ -80,6 +81,20 @@ public class Controller implements ErrorController
         {
             throw new MovieNotFoundException();
         }
+        m.updateFields();
+        return m;
+    }
+
+    /**
+     * An endpoint that returns a random Oscar-nominated movie.
+     *
+     * @return a random Movie
+     */
+    @GetMapping("/random")
+    public Movie random()
+    {
+        Random r = new Random();
+        Movie m = ALL_MOVIES.get(r.nextInt(ALL_MOVIES.size()));
         m.updateFields();
         return m;
     }
