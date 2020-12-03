@@ -121,13 +121,25 @@ public class Controller implements ErrorController
             {
                 if (award.getCategory().toUpperCase().contains(category.toUpperCase()))
                 {
-                    if ("true".equalsIgnoreCase(winner) && award.isWinner()) matches.add(movie);
-                    else if ("false".equalsIgnoreCase(winner) && !award.isWinner()) matches.add(movie);
-                    else if ("none".equals(winner)) matches.add(movie);
+                    // Adds matching winners if requested
+                    if ("true".equalsIgnoreCase(winner) && award.isWinner())
+                    {
+                        matches.add(movie);
+                    }
+                    // Adds matching non-winners if requested
+                    else if ("false".equalsIgnoreCase(winner) && !award.isWinner())
+                    {
+                        matches.add(movie);
+                    }
+                    // Adds all movies with matching category
+                    else if ("none".equals(winner))
+                    {
+                        matches.add(movie);
+                    }
                 }
             }
         }
-        if (matches.size() == 0)
+        if (matches.isEmpty())
         {
             throw new CategoryNotFoundException();
         }
