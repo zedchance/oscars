@@ -9,7 +9,7 @@
         <module name="oscars" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="11">
+    <bytecodeTargetLevel>
       <module name="oscars" target="11" />
     </bytecodeTargetLevel>
   </component>
