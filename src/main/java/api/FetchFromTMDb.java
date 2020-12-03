@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.Map.Entry;
 
-public class TMDb_Fetch
+public class FetchFromTMDb
 {
     private MovieResults results;
 
@@ -30,7 +30,7 @@ public class TMDb_Fetch
 
             }
     }
-    TMDb_Fetch(String title)
+    FetchFromTMDb(String title)
     {
         try
         {
@@ -43,7 +43,7 @@ public class TMDb_Fetch
             e.printStackTrace();
         }
     }
-    TMDb_Fetch(String title, int year)
+    FetchFromTMDb(String title, int year)
     {
         try
         {
