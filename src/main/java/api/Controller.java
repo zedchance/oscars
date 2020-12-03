@@ -4,9 +4,9 @@ import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Oscars API Controller
@@ -19,7 +19,7 @@ public class Controller implements ErrorController
      * read into memory once so it can be reused.
      */
     private static final List<Movie> ALL_MOVIES = FetchFromCSV.all();
-    private Random r = new Random();
+    private SecureRandom r = new SecureRandom();
 
     /**
      * A test endpoint to make sure that the API is running.
