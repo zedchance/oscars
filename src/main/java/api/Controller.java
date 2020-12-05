@@ -119,7 +119,6 @@ public class Controller implements ErrorController
         {
             for (Award award : movie.getAwards())
             {
-
                 if (award.getCategory().toUpperCase().contains(category.toUpperCase()))
                 {
                     // Adds matching winners if requested

@@ -8,7 +8,8 @@ year_film,year_ceremony,ceremony,category,name,film,winner
 1927,1928,1,ART DIRECTION,William Cameron Menzies,The Dove;,True
 1927,1928,1,ART DIRECTION,Harry Oliver,7th Heaven,False
 1927,1928,1,CINEMATOGRAPHY,George Barnes,The Devil Dancer;,False
-1927,1928,1,CINEMATOGRAPHY,"Charles Rosher, Karl Struss",Sunrise,True
+1927,1928,1,CINEMATOGRAPHY,Charles Rosher,Sunrise,True
+1927,1928,1,CINEMATOGRAPHY,Karl Struss,Sunrise,True
 1927,1928,1,DIRECTING (Comedy Picture),Lewis Milestone,Two Arabian Knights,True
 1927,1928,1,DIRECTING (Comedy Picture),Ted Wilde,Speedy,False
 1927,1928,1,DIRECTING (Dramatic Picture),Frank Borzage,7th Heaven,True
