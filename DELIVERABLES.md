@@ -46,7 +46,7 @@
 - [x] More than one endpoint that delivers a collection resource.
     - `/all`, `/category/{name}`, and `/winner` return collection resources.
 - [x] More than one endpoint that delivers a singleton resource.
-    - The `/random` endpoint returns a singleton resource, a randomly selected movie.
+    - `/movie` and `/random` return singleton resources, a movie by title or a randomly selected movie, respectively.
 - [x] GUI for the product (or portions thereof).
     - The GUI can be accessed at the root, `localhost:8080/`
 - [x] Well-designed HTML page documenting API endpoints and example inputs/outputs.
@@ -61,7 +61,7 @@
 - [x] Create mockups for proposed GUI (even if not implemented).
     - Mockups can be viewed [here](https://github.com/zedchance/oscars/wiki/Mockups).
 - [x] Incorporate pair programing during one Sprint.
-    - Pair programming was performed during the development of PR [#30](https://github.com/zedchance/oscars/pull/30), video can be viewed [here]().
+    - Pair programming was performed during the development of PR [#30](https://github.com/zedchance/oscars/pull/30), video can be viewed [here](https://www.youtube.com/watch?v=8EGnCJyYC2s).
 - [ ] Incorporate one or more design patterns.
 - [x] Adopt a coding standard and follow it.
     - The team adopted a coding standard, and enforced it via [these files](.idea/codeStyles).
