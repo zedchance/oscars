@@ -48,7 +48,21 @@ public class Movie
             }
             else
             {
-                this.error = f.getError();
+                // check the next year in case the csv file had it listed incorrectly
+                String nextYear = String.valueOf(Integer.parseInt(year) + 1);
+                f = new FetchFromOMDb(title, nextYear);
+                if (f.isSuccessful())
+                {
+                    this.genre = f.getGenre();
+                    this.plot = f.getPlot();
+                    this.poster = f.getPoster();
+                    this.website = f.getWebsite();
+                    this.year = nextYear; // update year to match entry found on OMDb
+                }
+                else
+                {
+                    this.error = f.getError();
+                }
             }
         }
         // else no update required
