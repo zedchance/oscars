@@ -1,6 +1,7 @@
 package api;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.List;
 
 public class Movie
@@ -195,5 +196,11 @@ public class Movie
         }
         Movie a = (Movie) o;
         return this.title.equals(a.title) && this.year.equals(a.year);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(title, year, ceremony, awards, genre, plot, poster, website, error);
     }
 }
