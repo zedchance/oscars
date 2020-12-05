@@ -61,7 +61,7 @@
 - [x] Create mockups for proposed GUI (even if not implemented).
     - Mockups can be viewed [here](https://github.com/zedchance/oscars/wiki/Mockups).
 - [x] Incorporate pair programing during one Sprint.
-    - Pair programming was performed during the development of PR [#30](https://github.com/zedchance/oscars/pull/30), video can be viewed [here](https://www.youtube.com/watch?v=8EGnCJyYC2s).
+    - Pair programming was performed during the development of PR [#30](https://github.com/zedchance/oscars/pull/30), video can be viewed [here](https://www.youtube.com/watch?v=Cvt6B0-nuSE).
 - [ ] Incorporate one or more design patterns.
 - [x] Adopt a coding standard and follow it.
     - The team adopted a coding standard, and enforced it via [these files](.idea/codeStyles).
