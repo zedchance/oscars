@@ -11,7 +11,7 @@
 - [x] Must provide a REST endpoint that allows search of 1 Oscar category and returns results containing the nominees in JSON.
     - The `/category/{name}` endpoint returns a collection resource of a specific Oscar category in JSON.
 - [x] Must provide a minimum level of documentation regarding access, input, and output to your API endpoints. 
-    - API endpoint access documented in [README](README.md#Use).
+    - API endpoint access documented in [the wiki](https://github.com/zedchance/oscars/wiki/Endpoints).
 
 ### Process
 
@@ -19,7 +19,7 @@
 - [x] Must have one persona.
 - [x] Must store source code in a repository such as GitHub
     - [x] Instructor must receive invite to/location of repository.
-    - [ ] There must be evidence of ongoing repository activity for each sprint.
+    - [x] There must be evidence of ongoing repository activity for each sprint.
 - [x] Must use Flying Donut to track and adhere to Scrum Process
     - [x] Instructor must receive invite to/location of project.
 - [x] Must implement AT LEAST one user story per sprint.
@@ -39,33 +39,34 @@
 
 - [x] The results returned contain data which correlates the Oscar category results with additional data from an outside source such as OMDb, TMDb, TVDb etc. by providing a link to an external site for the movie.
     - OMDb is used when the singleton endpoint `/movie/{title}` is called. This provides a link to the IMDb page.
-- [ ] The search feature allows limiting results to a date range.
+- [x] The search feature allows limiting results to a date range.
+    - `/all` takes optional parameters to specify a year range. For example: `/all/1950` or `/all/1950/1955`.
 - [x] More than one category can be searched.
     - The `/category/{name}` category can search any of the Oscar categories listed [here](https://github.com/zedchance/oscars/wiki/Endpoints#category).
 - [x] More than one endpoint that delivers a collection resource.
-    - Both `/all` and `/category/{name}` return collection resources.
-- [ ] More than one endpoint that delivers a singleton resource.
-- [ ] GUI for the product (or portions thereof).
-- [ ] Well-designed HTML page documenting API endpoints and example inputs/outputs.
+    - `/all`, `/category/{name}`, and `/winner` return collection resources.
+- [x] More than one endpoint that delivers a singleton resource.
+    - The `/random` endpoint returns a singleton resource, a randomly selected movie.
+- [x] GUI for the product (or portions thereof).
+    - The GUI can be accessed at the root, `localhost:8080/`
+- [x] Well-designed HTML page documenting API endpoints and example inputs/outputs.
+    - A page documenting API endpoints, including example input and output, can be found [here](https://github.com/zedchance/oscars/wiki/Endpoints) in the wiki.
 
 ### Process
 
 - [ ] Incorporate test-driven development practice for one Sprint.
-    - As evidenced by timestamps on check in for test code vs. check in for implementation code.
-- [ ] Refactor code in a significant manner with a clear and stated goal for refactoring.
-    - As evidenced by an implemented story from the Product Backlog with corresponding work in the repository.
+- [x] Refactor code in a significant manner with a clear and stated goal for refactoring.
+    - The repeated code in `FetchFromCSV` was refactored in a manner that was tracked via Flying Donut #159. This was merged in [#26](https://github.com/zedchance/oscars/pull/26).
 - [ ] Incorporate Contextual Inquiry/Elicitation techniques to create visual persona(s) and develop additional personas.
-    - As evidenced by notes taken from the inquiries and creation of additional visual persona(s) beyond the minimum (part of deliverable 2).
 - [x] Create mockups for proposed GUI (even if not implemented).
     - Mockups can be viewed [here](https://github.com/zedchance/oscars/wiki/Mockups).
-- [ ] Incorporate pair programing during one Sprint.
-    - As evidenced by a 1-minute clip of a recording in-person or Use Together session with link included in final deliverable.
+- [x] Incorporate pair programing during one Sprint.
+    - Pair programming was performed during the development of PR [#30](https://github.com/zedchance/oscars/pull/30), video can be viewed [here]().
 - [ ] Incorporate one or more design patterns.
-    - Indicate in user story which design pattern for which class(es) and provide comments in code (checked in to repository).
 - [x] Adopt a coding standard and follow it.
     - The team adopted a coding standard, and enforced it via [these files](.idea/codeStyles).
 - [ ] Use a database to store and retrieve Oscar data using queries.
-- [ ] Analyze code using SonarQube or similar tool.
-    - As evidenced by screenshot of SonarQube analysis.
+- [x] Analyze code using SonarQube or similar tool.
+    - We analyzed our code using SonarQube, and documented it [here](https://github.com/zedchance/oscars/wiki/SonarQube-analysis).
 - [x] Explain and document obstacles encountered during the project and how those obstacles were handled.
     - All obstacles encountered by the team were documented/discussed using GitHub's issue/pull request system, the entire stream can be viewed [here](https://github.com/zedchance/oscars/issues?q=).
