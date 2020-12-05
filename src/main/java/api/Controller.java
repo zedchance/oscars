@@ -4,6 +4,7 @@ import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.temporal.ValueRange;
 import java.util.ArrayList;
 
 /**
@@ -29,11 +30,83 @@ public class Controller implements ErrorController
      * An endpoint that returns all 4934 movies
      *
      * @return an ArrayList<Movie> of all the movies
+     * @throws InvalidRangeException
      */
-    @GetMapping("/all")
-    public ArrayList<Movie> all()
+    @GetMapping(value = {"/all", "/all/{year1}", "/all/{year1}/{year2}"} )
+    public ArrayList<Movie> all(@PathVariable(required = false) String year1,
+                                @PathVariable(required = false) String year2)
+            throws InvalidRangeException
     {
-        return FetchFromCSV.all();
+        ArrayList<Movie> all = FetchFromCSV.all();
+        ArrayList<Movie> yearOfAward = new ArrayList<>();
+        ValueRange range = ValueRange.of(1927, 2020);
+
+        if (year1 == null && year2 == null)
+        {
+            return all;
+        }
+
+        if (year1 != null && year2 == null)
+        {
+            long year1Long;
+            try
+            {
+                year1Long = Long.parseLong(year1);
+            }
+            catch (Exception e)
+            {
+                throw new InvalidRangeException();
+            }
+            if (!range.isValidIntValue(year1Long))
+            {
+                throw new InvalidRangeException();
+            }
+            for (Movie movie : all)
+            {
+                if (movie.getYear().contains(year1))
+                {
+                    yearOfAward.add(movie);
+                }
+            }
+            return yearOfAward;
+        }
+
+        if (year1 != null)
+        {
+            long year1Long;
+            long year2Long;
+            try
+            {
+                year1Long = Long.parseLong(year1);
+                year2Long = Long.parseLong(year2);
+            }
+            catch (Exception e)
+            {
+                throw new InvalidRangeException();
+            }
+            if (!range.isValidIntValue(year1Long) || !range.isValidIntValue(year2Long))
+            {
+                throw new InvalidRangeException();
+            }
+            if (year1Long > year2Long)
+            {
+                throw new InvalidRangeException();
+            }
+            ValueRange movieRange = ValueRange.of(year1Long, year2Long);
+
+            for (Movie movie : all)
+            {
+                if (movieRange.isValidIntValue(Long.parseLong(movie.getYear())))
+                {
+                    yearOfAward.add(movie);
+                }
+            }
+            return yearOfAward;
+        }
+
+        return null;
+
+
     }
 
     /**
@@ -54,7 +127,7 @@ public class Controller implements ErrorController
         Movie m = null;
         if (!"none".equals(year))
         {
-            for (Movie movie: list)
+            for (Movie movie : list)
             {
                 if (movie.getYear().equalsIgnoreCase(year)) m = movie;
             }
@@ -107,6 +180,27 @@ public class Controller implements ErrorController
         }
         return matches;
     }
+
+    @GetMapping("/winner")
+    public ArrayList<Movie> winner()
+    {
+        ArrayList<Movie> all = FetchFromCSV.all();
+        ArrayList<Movie> won = new ArrayList<>();
+
+        for (Movie movie : all)
+        {
+            for (Award award : movie.getAwards())
+            {
+                if (award.isWinner())
+                {
+                    won.add(movie);
+                    break;
+                }
+            }
+        }
+        return won;
+    }
+
 
     /**
      * Basic /error endpoint
