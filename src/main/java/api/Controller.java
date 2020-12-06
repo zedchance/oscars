@@ -4,6 +4,7 @@ import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.SecureRandom;
 import java.time.temporal.ValueRange;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,7 @@ public class Controller implements ErrorController
      * read into memory once so it can be reused.
      */
     private static final List<Movie> ALL_MOVIES = FetchFromCSV.all();
+    private SecureRandom r = new SecureRandom();
 
     /**
      * A test endpoint to make sure that the API is running.
@@ -39,9 +41,9 @@ public class Controller implements ErrorController
      * @return an ArrayList<Movie> of all the movies
      * @throws InvalidRangeException
      */
-    @GetMapping(value = {"/all", "/all/{year1}", "/all/{year1}/{year2}"} )
+    @GetMapping(value = {"/all", "/all/{year1}", "/all/{year1}/{year2}"})
     public List<Movie> all(@PathVariable(required = false) String year1,
-                                @PathVariable(required = false) String year2)
+                           @PathVariable(required = false) String year2)
     {
         ArrayList<Movie> yearOfAward = new ArrayList<>();
         ValueRange range = ValueRange.of(1927, 2020);
@@ -153,6 +155,19 @@ public class Controller implements ErrorController
     }
 
     /**
+     * An endpoint that returns a random Oscar-nominated movie.
+     *
+     * @return a random Movie
+     */
+    @GetMapping("/random")
+    public Movie random()
+    {
+        Movie m = ALL_MOVIES.get(r.nextInt(ALL_MOVIES.size()));
+        m.updateFields();
+        return m;
+    }
+
+    /**
      * An endpoint that returns all movies that won an award
      * in specified category. View all available categories
      * in the wiki. To specify if the movie won in that category, add the
@@ -174,13 +189,28 @@ public class Controller implements ErrorController
             {
                 if (award.getCategory().toUpperCase().contains(category.toUpperCase()))
                 {
-                    if ("true".equalsIgnoreCase(winner) && award.isWinner()) matches.add(movie);
-                    else if ("false".equalsIgnoreCase(winner) && !award.isWinner()) matches.add(movie);
-                    else if ("none".equals(winner)) matches.add(movie);
+                    // Adds matching winners if requested
+                    if ("true".equalsIgnoreCase(winner) && award.isWinner())
+                    {
+                        matches.add(movie);
+                        break;
+                    }
+                    // Adds matching non-winners if requested
+                    else if ("false".equalsIgnoreCase(winner) && !award.isWinner())
+                    {
+                        matches.add(movie);
+                        break;
+                    }
+                    // Adds all movies with matching category
+                    else if ("none".equals(winner))
+                    {
+                        matches.add(movie);
+                        break;
+                    }
                 }
             }
         }
-        if (matches.size() == 0)
+        if (matches.isEmpty())
         {
             throw new CategoryNotFoundException();
         }
@@ -205,7 +235,6 @@ public class Controller implements ErrorController
         }
         return won;
     }
-
 
     /**
      * Basic /error endpoint

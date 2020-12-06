@@ -9,7 +9,7 @@ public class FetchFromTMDbTest
         FetchFromTMDb f = new FetchFromTMDb("Joker");
         FetchFromTMDb.MovieResults result = f.getResults();
 
-        if(result.results.length > 0)
+        if (result.results.length > 0)
         {
             System.out.println("Top Result:");
             printMovie(result.results[0]);
@@ -19,13 +19,14 @@ public class FetchFromTMDbTest
         FetchFromTMDb h = new FetchFromTMDb("Joker", 2000);
         result = h.getResults();
 
-        if(result.results.length > 0)
+        if (result.results.length > 0)
         {
             System.out.println("Top Result:");
             printMovie(result.results[0]);
         }
 
     }
+
     public static void printMovie(FetchFromTMDb.MovieResults.Results movie)
     {
         System.out.println("=========================================================");
