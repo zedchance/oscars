@@ -41,9 +41,9 @@ public class Controller implements ErrorController
      * @return an ArrayList<Movie> of all the movies
      * @throws InvalidRangeException
      */
-    @GetMapping(value = {"/all", "/all/{year1}", "/all/{year1}/{year2}"} )
+    @GetMapping(value = {"/all", "/all/{year1}", "/all/{year1}/{year2}"})
     public List<Movie> all(@PathVariable(required = false) String year1,
-                                @PathVariable(required = false) String year2)
+                           @PathVariable(required = false) String year2)
     {
         ArrayList<Movie> yearOfAward = new ArrayList<>();
         ValueRange range = ValueRange.of(1927, 2020);
@@ -235,7 +235,6 @@ public class Controller implements ErrorController
         }
         return won;
     }
-
 
     /**
      * Basic /error endpoint
