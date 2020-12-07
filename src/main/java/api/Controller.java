@@ -57,6 +57,7 @@ public class Controller implements ErrorController
                        @RequestParam(value = "year", defaultValue = "none") String year)
     {
         ArrayList<Movie> matches = new ArrayList<>();
+        ArrayList<Movie> s = new ArrayList<>();
         Movie m = null;
         String s1= "\\b(?i)("+title+")\\b"; // regex for searching the word start first in the titles
         String s2= ".*(?i)"+title+".*"; // regex for searching the word start anywhere in the title
@@ -65,10 +66,19 @@ public class Controller implements ErrorController
             if (movie.getTitle().matches(s1) || movie.getTitle().matches(s2))
             {
                 matches.add(movie);
+
             }
             if (movie.getTitle().matches(s1))
             {
                 m = movie;
+                for (Movie match : matches)
+                {
+                    if (s.contains(match))
+                    {
+                        m = matches.get(0);
+                    }
+                    else s.add(match);
+                }
             }
             else if (movie.getTitle().matches(s2) && m==null)
             {
