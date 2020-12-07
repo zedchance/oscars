@@ -12,11 +12,13 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class FetchFromTMDb
 {
     private MovieResults results;
+    private Logger log = Logger.getLogger("api.log");
 
     public class MovieResults
     {
@@ -75,7 +77,7 @@ public class FetchFromTMDb
         }
         catch (IOException e)
         {
-            e.printStackTrace();
+            log.info(e.getMessage());
         }
     }
 
