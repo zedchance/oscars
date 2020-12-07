@@ -34,15 +34,7 @@ public class FetchFromTMDb
             public String backdrop_path;
             public String overview;
             public String poster_path;
-
         }
-    }
-
-    FetchFromTMDb(String title)
-    {
-        String safeTitle = URLEncoder.encode(title, StandardCharsets.UTF_8);
-        Map<String, String> params = Map.of("query", safeTitle, "api_key", APIKeys.TMDB_ID, "language", "en-US");
-        initialize(params);
     }
 
     FetchFromTMDb(String title, int year)
