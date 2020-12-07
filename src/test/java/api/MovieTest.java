@@ -167,4 +167,11 @@ class MovieTest
         Award b = new Award("WRITING (Original Screenplay)", "Written by Rian Johnson", false);
         assertEquals(false, a.equals(b));
     }
+
+    @Test
+    void hashcode()
+    {
+        Movie m = new Movie("2019", "Knives Out", "92");
+        assertEquals(83442240,m.hashCode());
+    }
 }
