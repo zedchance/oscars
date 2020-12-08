@@ -167,7 +167,10 @@ public class Controller implements ErrorController
         }
         else // returns first entry in matchList when year is not specified
         {
-            m = matchList.get(0);
+            if (!matchList.isEmpty())
+            {
+                m = matchList.get(0);
+            }
         }
 
         if (m == null)
