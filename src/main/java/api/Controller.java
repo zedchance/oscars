@@ -43,7 +43,7 @@ public class Controller implements ErrorController
      * An endpoint that returns all 4934 movies
      *
      * @return an ArrayList<Movie> of all the movies
-     * @throws InvalidRangeException
+     * @throws InvalidRangeException when range is invalid
      */
     @GetMapping(value = {"/all", "/all/{year1}", "/all/{year1}/{year2}"})
     public List<Movie> all(@PathVariable(required = false) String year1,
@@ -114,7 +114,7 @@ public class Controller implements ErrorController
             }
             return yearOfAward;
         }
-        return null;
+        return yearOfAward;
     }
 
     /**
@@ -243,7 +243,7 @@ public class Controller implements ErrorController
     }
 
     @GetMapping("/winner")
-    public ArrayList<Movie> winner()
+    public List<Movie> winner()
     {
         ArrayList<Movie> won = new ArrayList<>();
 

@@ -172,6 +172,6 @@ class MovieTest
     void hashcode()
     {
         Movie m = new Movie("2019", "Knives Out", "92");
-        assertEquals(83442240,m.hashCode());
+        assertEquals(83442240, m.hashCode());
     }
 }

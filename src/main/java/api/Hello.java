@@ -13,13 +13,13 @@ public class Hello
         this.greeting = greeting;
     }
 
-    public String getGreeting()
-    {
-        return greeting;
-    }
-
     public static void main(String[] args)
     {
         System.out.println("Hello team!");
+    }
+
+    public String getGreeting()
+    {
+        return greeting;
     }
 }

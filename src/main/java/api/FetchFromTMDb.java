@@ -20,23 +20,6 @@ public class FetchFromTMDb
     private MovieResults results;
     private Logger log = Logger.getLogger("api.log");
 
-    public class MovieResults
-    {
-        public Results[] results;
-
-        public class Results
-        {
-            public int id;
-            public String title;
-            public String release_date;
-            public String original_language;
-            public String original_title;
-            public String backdrop_path;
-            public String overview;
-            public String poster_path;
-        }
-    }
-
     FetchFromTMDb(String title, int year)
     {
         String safeTitle = URLEncoder.encode(title, StandardCharsets.UTF_8);
@@ -76,5 +59,22 @@ public class FetchFromTMDb
     public MovieResults getResults()
     {
         return results;
+    }
+
+    public class MovieResults
+    {
+        public Results[] results;
+
+        public class Results
+        {
+            public int id;
+            public String title;
+            public String release_date;
+            public String original_language;
+            public String original_title;
+            public String backdrop_path;
+            public String overview;
+            public String poster_path;
+        }
     }
 }

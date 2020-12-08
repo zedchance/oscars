@@ -5,19 +5,19 @@ package api;
  */
 public class Error
 {
-    private String error;
-    private int status_code;
+    private String err;
+    private int statusCode;
 
     /**
      * Create error with message and status code
      *
-     * @param error       message as String
-     * @param status_code status code as int
+     * @param e       message as String
+     * @param sc status code as int
      */
-    public Error(String error, int status_code)
+    public Error(String e, int sc)
     {
-        this.error = error;
-        this.status_code = status_code;
+        this.err = e;
+        this.statusCode = sc;
     }
 
     /**
@@ -27,7 +27,7 @@ public class Error
      */
     public String getError()
     {
-        return error;
+        return err;
     }
 
     /**
@@ -35,8 +35,8 @@ public class Error
      *
      * @return status code as int
      */
-    public int getStatus_code()
+    public int getStatusCode()
     {
-        return status_code;
+        return statusCode;
     }
 }
