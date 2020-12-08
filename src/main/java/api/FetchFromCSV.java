@@ -1,14 +1,26 @@
 package api;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
 
 public class FetchFromCSV
 {
-    public static ArrayList<Movie> all()
+    private static Logger log = Logger.getLogger("api.log");
+
+    private FetchFromCSV()
+    {
+        throw new IllegalStateException("Utility class");
+    }
+
+    public static List<Movie> all()
     {
         String csvFile = "/KaggleData_the_oscar_award.csv";
-        String data = "";
+        String data;
         String title;
         String year;
         String ceremony;
@@ -20,7 +32,7 @@ public class FetchFromCSV
         InputStream in = FetchFromCSV.class.getResourceAsStream(csvFile);
         try (BufferedReader br = new BufferedReader(new InputStreamReader(in)))
         {
-            br.readLine(); //reads the first line of all the headers because we are not interested in it.
+            data = br.readLine(); // reads the first line of all the headers because we are not interested in it.
             while ((data = br.readLine()) != null)
             {
                 // use comma as separator
@@ -51,7 +63,7 @@ public class FetchFromCSV
         }
         catch (IOException e)
         {
-            e.printStackTrace();
+            log.info(e.getMessage());
         }
         return movieData;
     }

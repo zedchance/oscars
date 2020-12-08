@@ -20,6 +20,10 @@ public class Controller implements ErrorController
      * read into memory once so it can be reused.
      */
     private static final List<Movie> ALL_MOVIES = FetchFromCSV.all();
+
+    /**
+     * SecureRandom object for the /random endpoint
+     */
     private SecureRandom r = new SecureRandom();
 
     /**
@@ -39,7 +43,7 @@ public class Controller implements ErrorController
      * An endpoint that returns all 4934 movies
      *
      * @return an ArrayList<Movie> of all the movies
-     * @throws InvalidRangeException
+     * @throws InvalidRangeException when range is invalid
      */
     @GetMapping(value = {"/all", "/all/{year1}", "/all/{year1}/{year2}"})
     public List<Movie> all(@PathVariable(required = false) String year1,
@@ -110,7 +114,7 @@ public class Controller implements ErrorController
             }
             return yearOfAward;
         }
-        return null;
+        return yearOfAward;
     }
 
     /**
@@ -126,46 +130,52 @@ public class Controller implements ErrorController
     public Movie movie(@PathVariable("title") String title,
                        @RequestParam(value = "year", defaultValue = "none") String year)
     {
-        ArrayList<Movie> matches = new ArrayList<>();
-        ArrayList<Movie> s = new ArrayList<>();
+        ArrayList<Movie> matchList = new ArrayList<>();
         Movie m = null;
-        String s1= "\\b(?i)("+title+")\\b"; // regex for searching the word start first in the titles
-        String s2= ".*(?i)"+title+".*"; // regex for searching the word start anywhere in the title
+        String startsWithTitle = "\\b(?i)(" + title + ")\\b"; // regex for matching search at start of title
+        String containsTitle = ".*(?i)" + title + ".*"; // regex for matching search anywhere in title
+
+        // Adds all exact matches to matchList
         for (Movie movie : ALL_MOVIES)
         {
-            if (movie.getTitle().matches(s1) || movie.getTitle().matches(s2))
+            if (movie.getTitle().matches(startsWithTitle))
             {
-                matches.add(movie);
-
-            }
-            if (movie.getTitle().matches(s1))
-            {
-                m = movie;
-                for (Movie match : matches)
-                {
-                    if (s.contains(match))
-                    {
-                        m = matches.get(0);
-                    }
-                    else s.add(match);
-                }
-            }
-            else if (movie.getTitle().matches(s2) && m==null)
-            {
-                m = movie;
+                matchList.add(movie);
             }
         }
+
+        // Adds all movies that contain the title searched to the end of matchList
+        for (Movie movie : ALL_MOVIES)
+        {
+            if (movie.getTitle().matches(containsTitle) && !matchList.contains(movie))
+            {
+                matchList.add(movie);
+            }
+        }
+
+        // When year is specified, searches matchList for title with matching year, returning first match
         if (!"none".equals(year))
         {
-            for (Movie movie : matches)
+            for (Movie movie : matchList)
             {
-                if (movie.getYear().equalsIgnoreCase(year)) m = movie;
+                if (movie.getYear().equalsIgnoreCase(year))
+                {
+                    m = movie;
+                    break;
+                }
             }
         }
+        // returns first entry in matchList when year is not specified
+        else if (!matchList.isEmpty())
+        {
+            m = matchList.get(0);
+        }
+
         if (m == null)
         {
             throw new MovieNotFoundException();
         }
+
         m.updateFields();
         return m;
     }
@@ -234,7 +244,7 @@ public class Controller implements ErrorController
     }
 
     @GetMapping("/winner")
-    public ArrayList<Movie> winner()
+    public List<Movie> winner()
     {
         ArrayList<Movie> won = new ArrayList<>();
 

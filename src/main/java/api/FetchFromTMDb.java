@@ -12,36 +12,13 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class FetchFromTMDb
 {
     private MovieResults results;
-
-    public class MovieResults
-    {
-        public Results[] results;
-
-        public class Results
-        {
-            public int id;
-            public String title;
-            public String release_date;
-            public String original_language;
-            public String original_title;
-            public String backdrop_path;
-            public String overview;
-            public String poster_path;
-
-        }
-    }
-
-    FetchFromTMDb(String title)
-    {
-        String safeTitle = URLEncoder.encode(title, StandardCharsets.UTF_8);
-        Map<String, String> params = Map.of("query", safeTitle, "api_key", APIKeys.TMDB_ID, "language", "en-US");
-        initialize(params);
-    }
+    private Logger log = Logger.getLogger("api.log");
 
     FetchFromTMDb(String title, int year)
     {
@@ -75,12 +52,29 @@ public class FetchFromTMDb
         }
         catch (IOException e)
         {
-            e.printStackTrace();
+            log.info(e.getMessage());
         }
     }
 
     public MovieResults getResults()
     {
         return results;
+    }
+
+    public class MovieResults
+    {
+        public Results[] results;
+
+        public class Results
+        {
+            public int id;
+            public String title;
+            public String release_date;
+            public String original_language;
+            public String original_title;
+            public String backdrop_path;
+            public String overview;
+            public String poster_path;
+        }
     }
 }
